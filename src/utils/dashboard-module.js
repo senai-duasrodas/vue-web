@@ -4,10 +4,6 @@ const dashboard = [
         link: '/dashboard',
     },
     {
-        name: 'Login',
-        link: '/',
-    },
-    {
         name: 'Cadastros',
         link: '/cadastros'
     },
