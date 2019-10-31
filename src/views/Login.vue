@@ -4,16 +4,16 @@
       <div class="d-flex justify-content-center">
         <img src="../assets/Logo_DR.png" class="img-fluid w-50" />
       </div>
-      <div class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
+      <div :class="{'error' : isfalse}" class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
         <div class="login-text d-flex justify-content-center mb-4">
           <h4>Login</h4>
         </div>
 
         <div>
-          <advanced-input @value="inputValue($event, 'cracha')" :label="'Crachá:'" :type="'text'" />
+          <beauty-input @value="inputValue($event, 'cracha')" :label="'Crachá:'" :type="'text'" />
         </div>
         <div>
-          <advanced-input @value="inputValue($event, 'senha')" :label="'Senha:'" :type="'password'" />
+          <beauty-input @value="inputValue($event, 'senha')" :label="'Senha:'" :type="'password'" />
         </div>
       </div>
       <div class="d-flex justify-content-center m-3">
@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import advancedInput from '../components/inputs/advanced-input'
+import beauty from '../components/inputs/beauty'
 
 export default {
   components: {
-    'advanced-input': advancedInput,
+    'beauty-input': beauty,
   },
 
   data() {
@@ -37,6 +37,7 @@ export default {
         { type: 'cracha', value: '' },
         { type: 'senha', value: '' }
       ],
+      isfalse: false,
     };
   },
 
@@ -48,12 +49,23 @@ export default {
     },
 
     loginValidation() {
-      // usar metodo fetch para as requições, não precisa instalar
-      // nenhuma dependencia e é mais leve por não usar nenhum npm install
+      this.$router.push('/dashboard');
+      /*
+      console.log(this.loginVModel);
+      const teste = 'oi'
+      this.$http.post(`${this.$apiUrl}/users ${teste}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: this.loginVModel
+      })
+        .then(res => res.json())
+        .then(json => console.log(json))
+        .catch(err => console.log(err))*/
     },
   },
 };
-
 </script>
 
 <style lang="scss">
