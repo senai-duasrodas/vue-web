@@ -4,7 +4,7 @@
       <div class="d-flex justify-content-center">
         <img src="../assets/Logo_DR.png" class="img-fluid w-50" />
       </div>
-      <div class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
+      <div :class="{'error' : isfalse}" class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
         <div class="login-text d-flex justify-content-center mb-4">
           <h4>Login</h4>
         </div>
@@ -37,6 +37,7 @@ export default {
         { type: 'cracha', value: '' },
         { type: 'senha', value: '' }
       ],
+      isfalse: false,
     };
   },
 
@@ -48,12 +49,10 @@ export default {
     },
 
     loginValidation() {
-      // usar metodo fetch para as requições, não precisa instalar
-      // nenhuma dependencia e é mais leve por não usar nenhum npm install
+      
     },
   },
 };
-
 </script>
 
 <style lang="scss">
