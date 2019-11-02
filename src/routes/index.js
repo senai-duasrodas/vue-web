@@ -2,10 +2,16 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard'
 import Cadastros from '../views/Cadastros'
+import Login from '../views/Login'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    name: 'login',
+    component: Login
+  },
   {
     path: '/dashboard',
     name: 'dashboard',

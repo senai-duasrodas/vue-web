@@ -24,14 +24,14 @@ export default {
             dashboard
         }
     },
-    mounted: function() {
+    mounted() {
         console.log(dashboard);
-    },
+    }
 }
 </script>
 <style lang="scss" scoped>
     .sidebar-wrapper {
-        width: 15rem;
+        width:100%;
         height: 100vh;
     }
     .sidebar-wrapper {

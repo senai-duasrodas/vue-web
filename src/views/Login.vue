@@ -10,10 +10,10 @@
         </div>
 
         <div>
-          <beauty-input @value="inputValue($event, 'cracha')" :label="'Crachá:'" :type="'text'" />
+          <advanced-input @value="inputValue($event, 'cracha')" :label="'Crachá:'" :type="'text'" />
         </div>
         <div>
-          <beauty-input @value="inputValue($event, 'senha')" :label="'Senha:'" :type="'password'" />
+          <advanced-input @value="inputValue($event, 'senha')" :label="'Senha:'" :type="'password'" />
         </div>
       </div>
       <div class="d-flex justify-content-center m-3">
@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import beauty from '../components/inputs/beauty'
+import advancedInput from '../components/inputs/advanced-input'
 
 export default {
   components: {
-    'beauty-input': beauty,
+    'advanced-input': advancedInput,
   },
 
   data() {
@@ -49,20 +49,7 @@ export default {
     },
 
     loginValidation() {
-      this.$router.push('/dashboard');
-      /*
-      console.log(this.loginVModel);
-      const teste = 'oi'
-      this.$http.post(`${this.$apiUrl}/users ${teste}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: this.loginVModel
-      })
-        .then(res => res.json())
-        .then(json => console.log(json))
-        .catch(err => console.log(err))*/
+      
     },
   },
 };
