@@ -3,8 +3,7 @@
     <div class="input-container mt-3">
       <input
         :id="label"
-        v-model="value"
-        @keyup="sendValue"
+        v-model="model"
         class="input p-3"
         :type="type"
         pattern=".+"
@@ -22,17 +21,24 @@ export default {
     label: { type: String, default: () => '' },
     type: { type: String, default: () => '' },
     placeholder: { type: String, default: () => '' },
+    value: { type: String, default: '' }
   },
 
   data() {
     return {
-      value: ''
+      
     }
   },
 
-  methods: {
-    sendValue() {
-      this.$emit('value', this.value)
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+
+      set(val) {
+        this.$emit('input', val)
+      } 
     }
   }
 }
