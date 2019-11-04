@@ -29,6 +29,7 @@
 
 <script>
 import advancedInput from '../components/inputs/advanced-input'
+import _ from 'lodash'
 
 export default {
   components: {
@@ -38,8 +39,8 @@ export default {
   data() {
     return {
       inputValues: {
-        cracha: '',
-        senha: ''
+        cracha: '54321',
+        senha: '12345'
       }
     };
   },
@@ -54,21 +55,29 @@ export default {
         },
         body: JSON.stringify(this.inputValues)
       }).then(res => res.json())
-        .then(json => {
-          if (!json.result) this.$swal({
+        .then(async json => {
+          if (json.statusCode === 404) return this.$swal({
             type: 'error',
-            title: 'Usuário não encontrado!',
+            title: `${json.err.result}`,
           })
-          else this.$swal({
-            position: 'top',
-            type: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
-          }).then(() => {
-            this.$router.replace('dashboard')
-          })
-          
+          try {
+            await this.setTokenLocalStorage(json);
+
+            this.$swal({
+              position: 'top',
+              type: 'success',
+              title: 'Autenticado com sucesso!',
+              showConfirmButton: false,
+              timer: 1500
+            }).then(() => {
+              this.$router.replace('dashboard')
+            });
+          } catch (err) {
+            this.$swal({
+              type: 'error',
+              title: `Ocorreu um erro! ${err}`,
+            })
+          }
         })
         .catch(err => {
           this.$swal({
@@ -77,6 +86,14 @@ export default {
           })
         })
     },
+
+    setTokenLocalStorage(token) {      
+      return new Promise((resolve, reject) => {
+        if (_.isEmpty(token)) reject('Não há nenhum token de autenticação!');
+        localStorage.setItem('token', token.token)
+        resolve();
+      })
+    }
   },
 };
 </script>
