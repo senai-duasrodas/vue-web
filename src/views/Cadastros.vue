@@ -4,8 +4,15 @@
       <div class="menu-items">
         <sidebar />
       </div>
-      <div class="content">
-        <card />
+      <div class="contentCard">
+        <card-input title="Ordem de Manutenção" icon="fas fa-pencil-alt" />
+        <card-input title="Ordem de Manutenção" icon="fas fa-pencil-alt" />
+        <card-input title="Ordem de" icon="fas fa-pencil-alt" />
+      </div>
+      <div class="contentCard">
+        <card-input title="Ordem de" icon="fas fa-pencil-alt" />
+        <card-input title="Ordem de" icon="fas fa-pencil-alt" />
+        <card-input title="Ordem de" icon="fas fa-pencil-alt" />
       </div>
     </div>
   </div>
@@ -19,7 +26,7 @@ import card from '../components/card/card-option.vue'
 export default {
   components: {
     sidebar,
-    card
+    'card-input': card
   }
 }
 </script>
@@ -30,18 +37,16 @@ export default {
     width: 17%;
     float: left;
   }
-
   .content {
     position: relative;
     width: 83%;
     float: left;
   }
-
-  .content-geral {
-    width: 100%;
-    height: 100%;
+  .contentCard{
+    display:flex;
+    justify-content: center;
+    padding:20px;
   }
-
   .slide-fade-enter-active {
     transition: all 2s ease;
   }

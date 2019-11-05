@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-center">
           <img src="../assets/Logo_DR.png" class="img-fluid w-50" />
         </div>
-        <form @submit.prevent="loginValidation">
+        <form @submit.prevent="testingDevelopmentRoutes">
           <div class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
             <div class="login-text d-flex justify-content-center mb-4">
               <h4>Login</h4>
@@ -93,7 +93,12 @@ export default {
         localStorage.setItem('token', token.token)
         resolve();
       })
+    },
+
+    testingDevelopmentRoutes(){
+      this.$router.push('dashboard')
     }
+
   },
 };
 </script>
