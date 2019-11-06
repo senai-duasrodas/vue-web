@@ -1,12 +1,12 @@
 <template>
 	<div class="root-card-option-component">
-		<div class="card-option">
+		<div class="card-option shadow">
 			<div class="card-wrapper">
 				<div class="icon-card">
-					<i class="fas fa-pencil-alt"></i>
+					<i :class="icon" class="fa-3x"></i>
 				</div>
 				<div class="text-card">
-					<span>Ordem de Manutenção</span>
+					<span>{{ title }}</span>
 				</div>
 			</div>
 		</div>
@@ -15,7 +15,10 @@
 
 <script>
 export default {
-
+	props:{
+		title: { type: String, default: '' },
+		icon: { type: String, default: '' }
+	}
 }
 </script>
 
@@ -23,13 +26,14 @@ export default {
 .root-card-option-component {
 	.card-option {
 		position: relative;
-		background-color: #09f;
+		background-color: #f8f9fa !important;
 		width: 300px;
 		height: 200px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border: 3px solid black;
+		border-radius: 2px;
+		margin-left:40px;
 		.card-wrapper {
 			display: flex;
 			flex-direction: column;
@@ -41,10 +45,9 @@ export default {
 			}
 		}
 	}
-	.icon-card {
-
+	.fa-pencil-alt {
+		color: red;
 	}
-
 	.slide-fade-enter-active {
     transition: all 2s ease;
   }

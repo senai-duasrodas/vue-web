@@ -4,8 +4,18 @@
       <div class="menu-items">
         <sidebar />
       </div>
-      <div class="content">
-        <card />
+      <div class="top-bar">
+        <topbar/>
+      </div>
+      <div class="contentCard">
+        <card-input title="Ordem de Manutenção" icon="fas fa-pencil-alt" />
+        <card-input title="Centro de Custo" icon="fas fa-pencil-alt" />
+        <card-input title="Equipamento" icon="fas fa-pencil-alt" />
+      </div>
+      <div class="contentCard">
+        <card-input title="Componentes" icon="fas fa-pencil-alt" />
+        <card-input title="Causa e defeitos" icon="fas fa-pencil-alt" />
+        <card-input title="EPI" icon="fas fa-pencil-alt" />
       </div>
     </div>
   </div>
@@ -15,33 +25,42 @@
 
 import sidebar from '../components/side-bar/sidebar.vue'
 import card from '../components/card/card-option.vue'
+import topbar from '../components/top-bar/topbarDash.vue'
 
 export default {
   components: {
     sidebar,
-    card
+    topbar,
+    'card-input': card
   }
 }
 </script>
 
 <style lang="scss">
 .root-cadastro-view {
+  .content-geral{
+    .top-bar{
+      margin-top:10px;
+    }
+    .menu-items{
+      margin-top:-10px;
+    }
+  }
   .menu-items {
     width: 17%;
     float: left;
+    margin-right:20px ;
   }
-
   .content {
     position: relative;
     width: 83%;
     float: left;
   }
-
-  .content-geral {
-    width: 100%;
-    height: 100%;
+  .contentCard{
+    display:flex;
+    justify-content: center;
+    padding:20px;
   }
-
   .slide-fade-enter-active {
     transition: all 2s ease;
   }
