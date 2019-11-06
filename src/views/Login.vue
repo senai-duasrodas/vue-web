@@ -10,7 +10,6 @@
             <div class="login-text d-flex justify-content-center mb-4">
               <h4>Login</h4>
             </div>
-
             <div>
               <advanced-input v-model="inputValues.cracha" :label="'Crachá:'" :type="'text'" />
             </div>
