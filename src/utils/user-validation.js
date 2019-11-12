@@ -3,9 +3,7 @@ const validate = {
     return new Promise(async (resolve, reject) => {
       try {
         const token = localStorage.getItem('token');
-        
-        await this.verifyToken(token);
-        
+                
         fetch(`${url}/users/token`, {
           method: 'post',
           headers: {
@@ -26,15 +24,8 @@ const validate = {
       }
     });
   },
-
-  verifyToken(token) {
-    return new Promise((resolve, reject) => {
-      if (token === null) reject('Não autorizado!')
-      resolve()
-    });
-  }
 }
 
-export default validate
+export default validate.validate
 
 
