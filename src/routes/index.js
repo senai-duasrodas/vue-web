@@ -5,6 +5,7 @@ import Cadastros from '../views/Cadastros'
 import Login from '../views/Login'
 
 import validate from '../utils/user-validation';
+import Swal from 'sweetalert2'
 
 Vue.use(VueRouter)
 
@@ -12,7 +13,11 @@ const routes = [
   {
     path: '/',
     name: 'login',
-    component: Login
+    component: Login,
+    beforeEnter(to, from, next) {
+      if (!localStorage.getItem('token')) return next();
+      return next('/dashboard');
+    }
   },
   {
     path: '/dashboard',
@@ -64,19 +69,17 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
   if (to.meta.requireAuth) {
     try {
-      const response = await validate.validate(this.$apiUrl)
-
+      const response = await validate(apiUrl)
       console.log('sucess: ', response);
       next();
     } catch (err) {
       console.log('error: ', err);
-
       localStorage.removeItem('token');
-
-      if (router.name === 'login') return
-      router.replace('');
-      next();
-      
+      Swal.fire({
+        type: 'warning',
+        title: 'Erro ao autentizar! Por favor, entre novamente!',
+      })
+      next('/');
     }
   } else next();
 });

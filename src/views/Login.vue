@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-center">
           <img src="../assets/Logo_DR.png" class="img-fluid w-50" />
         </div>
-        <form @submit.prevent="testingDevelopmentRoutes">
+        <form @submit.prevent="loginValidation">
           <div class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
             <div class="login-text d-flex justify-content-center mb-4">
               <h4>Login</h4>
@@ -28,7 +28,6 @@
 
 <script>
 import advancedInput from '../components/inputs/advanced-input'
-import _ from 'lodash'
 
 export default {
   components: {
@@ -78,17 +77,17 @@ export default {
             })
           }
         })
-        .catch(err => {
+        .catch(() => {
           this.$swal({
             type: 'error',
-            title: `Algo deu errado! ${err}`,
+            title: `Algo deu errado! Falha na requisição!`,
           })
         })
     },
 
     setTokenLocalStorage(token) {      
       return new Promise((resolve, reject) => {
-        if (_.isEmpty(token)) reject('Não há nenhum token de autenticação!');
+        if (this.$_.isEmpty(token)) reject('Não há nenhum token de autenticação!');
         localStorage.setItem('token', token.token)
         resolve();
       })
@@ -105,8 +104,6 @@ export default {
 <style lang="scss">
 .root-login-view {
   .conteiner {
-    width: 100vw;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;

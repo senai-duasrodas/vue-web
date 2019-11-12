@@ -1,12 +1,6 @@
 <template>
   <div class="root-cadastro-view">
     <div class="content-geral">
-      <div class="menu-items">
-        <sidebar />
-      </div>
-      <div class="top-bar">
-        <topbar/>
-      </div>
       <div class="contentCard">
         <card-input title="Ordem de Manutenção" icon="fas fa-pencil-alt" />
         <card-input title="Centro de Custo" icon="fas fa-pencil-alt" />
@@ -23,14 +17,10 @@
 
 <script>
 
-import sidebar from '../components/side-bar/sidebar.vue'
 import card from '../components/card/card-option.vue'
-import topbar from '../components/top-bar/topbarDash.vue'
 
 export default {
   components: {
-    sidebar,
-    topbar,
     'card-input': card
   }
 }

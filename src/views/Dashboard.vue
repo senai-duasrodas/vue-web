@@ -2,7 +2,6 @@
   <div class="root-dashboard-view">
     <div class="content-geral">
       <div class="menu-items">
-        <sidebar />
       </div>
     </div>
     
@@ -11,12 +10,11 @@
 
 <script>
 
-import sidebar from '../components/side-bar/sidebar.vue'
 
 
 export default {
   components: {
-    sidebar
+    
   }
 }
 </script>
