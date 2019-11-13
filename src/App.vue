@@ -1,34 +1,34 @@
 <template>
   <div id="app">
     <div v-if="routes !== 'login'" class="content">
-      <div class="sidebar-content shadow-lg">
-        
+      <div class="sidebar-content shadow">
+        <sidebar />
       </div>
 
       <div class="wrapper">
         <div class="topbar-content">
-          <topbar></topbar>
+          <topbar />
         </div>
 
         <div class="router-content">
-          <router-view></router-view>
+          <router-view />
         </div>
       </div>
     </div>
 
     <div v-else class="content justify-content-center align-items-center">
-      <router-view></router-view>
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-// import sidebar from './components/side-bar/sidebar.vue'
+import sidebar from './components/side-bar/sidebar.vue'
 import topbar from './components/top-bar/topbarDash.vue'
 
 export default {
   components: {
-    // sidebar,
+    sidebar,
     topbar,
   },
 
@@ -48,6 +48,10 @@ export default {
 </script>
 
 <style lang="scss">
+$red: #800000;
+$green: #41B883;
+$blue: #8ED6FB;
+
 body {
   background-color: #f1f1f1 !important;
   box-sizing: border-box;
@@ -79,7 +83,7 @@ body {
 
 @media screen and (max-width: 1366px) {
   .content > .sidebar-content {
-    min-width: 15rem;
+    min-width: 16rem;
   }
 }
 </style>
