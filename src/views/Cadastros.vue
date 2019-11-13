@@ -1,10 +1,12 @@
 <template>
   <div class="root-cadastro-view">
-    <div class="content-geral">
-      <div class="contentCard">
-        <card-input title="Ordem de Manutenção" icon="fas fa-pencil-alt" />
-        <card-input title="Centro de Custo" icon="fas fa-pencil-alt" />
-        <card-input title="Equipamento" icon="fas fa-pencil-alt" />
+   <div class="content-geral">
+    <div class="contentCard">
+    <card-input title="Ordem de Manutenção" icon="fas fa-pencil-alt" />
+      <card-input title="Centro de Custo" icon="fas fa-pencil-alt" />
+        <router-link to="/cadastro-equipamento">
+          <card-input title="Equipamento" icon="fas fa-pencil-alt" />
+        </router-link>
       </div>
       <div class="contentCard">
         <card-input title="Componentes" icon="fas fa-pencil-alt" />
@@ -16,40 +18,43 @@
 </template>
 
 <script>
-
-import card from '../components/card/card-option.vue'
+import card from "../components/card/card-option.vue";
 
 export default {
   components: {
-    'card-input': card
+    "card-input": card
   }
-}
+};
 </script>
 
 <style lang="scss">
 .root-cadastro-view {
-  .content-geral{
-    .top-bar{
-      margin-top:10px;
+  .content-geral {
+    .top-bar {
+      margin-top: 10px;
     }
-    .menu-items{
-      margin-top:-10px;
+    .menu-items {
+      margin-top: -10px;
     }
   }
   .menu-items {
     width: 17%;
     float: left;
-    margin-right:20px ;
+    margin-right: 20px;
   }
   .content {
     position: relative;
     width: 83%;
     float: left;
   }
-  .contentCard{
-    display:flex;
+  .contentCard {
+    display: flex;
     justify-content: center;
-    padding:20px;
+    padding: 20px;
+    text-decoration: none;
+  }
+  .text-card {
+    color: #000;
   }
   .slide-fade-enter-active {
     transition: all 2s ease;

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard'
 import Cadastros from '../views/Cadastros'
 import Login from '../views/Login'
+import CadastroEquipamento from '../views/CadastroEquipamento'
 
 import validate from '../utils/user-validation';
 import Swal from 'sweetalert2'
@@ -33,26 +34,32 @@ const routes = [
   },
   {
     path: '/solicitacoes',
-    name: 'Solicitações',
+    name: 'solicitacoes',
     component: Dashboard,
     meta: { requireAuth: true }
   },
   {
     path: '/consultas',
-    name: 'Consultas',
+    name: 'consultas',
     component: Dashboard,
     meta: { requireAuth: true }
   },
   {
     path: '/relatorios',
-    name: 'Relatórios',
+    name: 'relatorios',
     component: Dashboard,
     meta: { requireAuth: true }
   },
   {
     path: '/configuracoes',
-    name: 'Configurações',
+    name: 'configuracoes',
     component: Dashboard,
+    meta: { requireAuth: true }
+  },
+  {
+    path: '/cadastro-equipamento',
+    name: 'equipamento',
+    component: CadastroEquipamento,
     meta: { requireAuth: true }
   }
 ]
