@@ -1,7 +1,7 @@
 <template>
   <div class="container p-2">
     <div class="input-container mt-3">
-      <input
+      <select
         :id="label"
         v-model="model"
         class="input p-3"
@@ -10,6 +10,7 @@
         :placeholder="placeholder"
         required
       />
+      <!--<option v-for="opcaoSelect in opcoesSelect "></option>-->
       <label class="label p-2" :for="label">{{ label }}</label>
     </div>
   </div>

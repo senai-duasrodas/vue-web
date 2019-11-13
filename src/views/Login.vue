@@ -1,23 +1,26 @@
 <template>
-  <div class="conteiner">
-    <div class="login-wrapper">
-      <div class="d-flex justify-content-center">
-        <img src="../assets/Logo_DR.png" class="img-fluid w-50" />
-      </div>
-      <div class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
-        <div class="login-text d-flex justify-content-center mb-4">
-          <h4>Login</h4>
+  <div class="root-login-view">
+    <div class="conteiner">
+      <div class="login-wrapper">
+        <div class="d-flex justify-content-center">
+          <img src="../assets/logo.png" class="img-fluid w-50" />
         </div>
-
-        <div>
-          <advanced-input @value="inputValue($event, 'cracha')" :label="'Crachá:'" :type="'text'" />
-        </div>
-        <div>
-          <advanced-input @value="inputValue($event, 'senha')" :label="'Senha:'" :type="'password'" />
-        </div>
-      </div>
-      <div class="d-flex justify-content-center m-3">
-        <b-button @click="loginValidation" variant="danger">Acessar</b-button>
+        <form @submit.prevent="loginValidation">
+          <div class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
+            <div class="login-text d-flex justify-content-center mb-4">
+              <h4>Login</h4>
+            </div>
+            <div>
+              <advanced-input v-model="inputValues.cracha" :label="'Crachá:'" :type="'text'" />
+            </div>
+            <div>
+              <advanced-input v-model="inputValues.senha" :label="'Senha:'" :type="'password'" />
+            </div>
+          </div>
+          <div class="d-flex justify-content-center m-3">
+            <b-button type="submit" value="send" variant="danger">Acessar</b-button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -33,55 +36,98 @@ export default {
 
   data() {
     return {
-      loginVModel: [
-        { type: 'cracha', value: '' },
-        { type: 'senha', value: '' }
-      ],
+      inputValues: {
+        cracha: '54321',
+        senha: '12345'
+      }
     };
   },
 
   methods: {
-    inputValue($event, model) {
-      this.loginVModel.forEach(vmodel => {
-        if (vmodel.type === model) vmodel.value = $event
-      });
+    loginValidation() {
+      // if (!this.inputValues.cracha && )
+      fetch(`${this.$apiUrl}/users`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.inputValues)
+      }).then(res => res.json())
+        .then(async json => {
+          if (json.statusCode === 404) return this.$swal({
+            type: 'error',
+            title: `${json.err.result}`,
+          })
+          try {
+            await this.setTokenLocalStorage(json);
+
+            this.$swal({
+              position: 'top',
+              type: 'success',
+              title: 'Autenticado com sucesso!',
+              showConfirmButton: false,
+              timer: 1500
+            }).then(() => {
+              this.$router.replace('dashboard')
+            });
+          } catch (err) {
+            this.$swal({
+              type: 'error',
+              title: `Ocorreu um erro! ${err}`,
+            })
+          }
+        })
+        .catch(() => {
+          this.$swal({
+            type: 'error',
+            title: `Algo deu errado! Falha na requisição!`,
+          })
+        })
     },
 
-    loginValidation() {
-      // usar metodo fetch para as requições, não precisa instalar
-      // nenhuma dependencia e é mais leve por não usar nenhum npm install
+    setTokenLocalStorage(token) {      
+      return new Promise((resolve, reject) => {
+        if (this.$_.isEmpty(token)) reject('Não há nenhum token de autenticação!');
+        localStorage.setItem('token', token.token)
+        resolve();
+      })
     },
+
+    testingDevelopmentRoutes(){
+      this.$router.push('dashboard')
+    }
+
   },
 };
-
 </script>
 
 <style lang="scss">
-.conteiner {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.root-login-view {
+  .conteiner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.login-wrapper {
-  min-width: 20vw;
-  min-height: 100px;
-  padding: 10px;
-}
-
-@media screen and (max-width: 1366px) {
   .login-wrapper {
-    min-width: 30vw;
+    min-width: 20vw;
+    min-height: 100px;
+    padding: 10px;
+  }
+
+  @media screen and (max-width: 1366px) {
+    .login-wrapper {
+      min-width: 30vw;
+    }
+  }
+
+  .login-text {
+    h4 {
+      color: #777777;
+    }
+    border-bottom: 1px solid #e4e4e4;
+    width: 100%;
   }
 }
 
-.login-text {
-  h4 {
-    color: #777777;
-  }
-  border-bottom: 1px solid #e4e4e4;
-  width: 100%;
-}
 </style>
