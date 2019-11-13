@@ -2,26 +2,32 @@ const dashboard = [
     {
         name: 'Dashboard',
         link: '/dashboard',
+        icon: 'fa-th'
     },
     {
         name: 'Cadastros',
-        link: '/cadastros'
+        link: '/cadastros',
+        icon: 'fa-file-signature'
     },
     {
         name: 'Solicitações',
-        link: '/solicitacoes'
+        link: '/solicitacoes',
+        icon: 'fa-plus'
     },
     {
         name: 'Consultas',
-        link: '/consultas'
+        link: '/consultas',
+        icon: 'fa-search'
     },
     {
         name: 'Relatórios',
-        link: '/relatorios'
+        link: '/relatorios',
+        icon: 'fa-history'
     },
     {
         name: 'Configurações',
-        link: '/configuracoes'
+        link: '/configuracoes',
+        icon: 'fa-cog'
     }
 ];
 

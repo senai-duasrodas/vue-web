@@ -3,7 +3,7 @@
     <div class="conteiner">
       <div class="login-wrapper">
         <div class="d-flex justify-content-center">
-          <img src="../assets/Logo_DR.png" class="img-fluid w-50" />
+          <img src="../assets/logo.png" class="img-fluid w-50" />
         </div>
         <form @submit.prevent="loginValidation">
           <div class="hold-login mt-4 p-4 rounded-lg bg-white shadow-sm">
