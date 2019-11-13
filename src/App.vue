@@ -48,10 +48,6 @@ export default {
 </script>
 
 <style lang="scss">
-$red: #800000;
-$green: #41B883;
-$blue: #8ED6FB;
-
 body {
   background-color: #f1f1f1 !important;
   box-sizing: border-box;
@@ -63,22 +59,30 @@ body {
   display: flex;
   .wrapper {
     display: flex;
+    overflow: auto;
     flex-direction: column;
     width: 100%;
+    .topbar-content {
+      width: 100%;
+      padding: 20px;
+      position: sticky;
+      top: 0px;
+      z-index: 10;
+    }
+    .router-content {
+      box-sizing: border-box;
+      padding: 20px;
+      width: 100%;
+      height: 100%;
+    }
   }
   .sidebar-content {
-    min-width: 20rem;
+    overflow: auto;
+    max-width: 20rem;
     background-color: white;
     height: 100%;
   }
-  .topbar-content {
-    width: 100%;
-    padding: 20px;
-  }
-  .router-content {
-    width: 100%;
-    height: 100%;
-  }
+  
 }
 
 @media screen and (max-width: 1366px) {

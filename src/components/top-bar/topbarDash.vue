@@ -10,16 +10,19 @@
       <div class="name-notification">
         <i class="fas fa-bell" />
         <span>|</span>
+
         <b-dropdown size="lg" right variant="link" toggle-class="text-decoration-none p-0" no-caret>
           <template v-slot:button-content>
             <i class="fas fa-user" />
           </template>
+
           <b-dropdown-item href="#">
             <i class="fas fa-id-card-alt" />
             <span>
               Meu perfil
             </span>
           </b-dropdown-item>
+
           <b-dropdown-item @click="logoff()" toggle-class="red">
             <i class="fas fa-sign-out-alt" />
             <span>
@@ -70,6 +73,7 @@ export default {
   height: 65px;
   padding: 20px;
   background: #ffff;
+  box-shadow: 1px 2px 4px -1px rgb(194, 194, 194);
   border-radius: 42px;
   .container-wrapper {
     display: flex;
