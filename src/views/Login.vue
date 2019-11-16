@@ -11,10 +11,10 @@
               <h4>Login</h4>
             </div>
             <div>
-              <advanced-input v-model="inputValues.cracha" :label="'Crachá:'" :type="'text'" />
+              <advanced-input v-model="inputValues.numeroCracha" label="Crachá:" type="text" />
             </div>
             <div>
-              <advanced-input v-model="inputValues.senha" :label="'Senha:'" :type="'password'" />
+              <advanced-input v-model="inputValues.senha" label="Senha:" type="password" />
             </div>
           </div>
           <div class="d-flex justify-content-center m-3">
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       inputValues: {
-        cracha: '54321',
+        numeroCracha: '54321',
         senha: '12345'
       }
     };
@@ -101,7 +101,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .root-login-view {
   .conteiner {
     display: flex;

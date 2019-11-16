@@ -11,7 +11,9 @@
         </div>
 
         <div class="router-content">
-          <router-view />
+          <transition name="slide-fade" mode="out-in">
+            <router-view />
+          </transition>
         </div>
       </div>
     </div>
@@ -48,6 +50,12 @@ export default {
 </script>
 
 <style lang="scss">
+:root{
+  --duas-rodas: #F34336;
+  --duas-rodas-soft: #E66E6D;
+  --shadow-gray: rgb(160, 160, 160);
+}
+
 body {
   background-color: #f1f1f1 !important;
   box-sizing: border-box;
@@ -90,4 +98,16 @@ body {
     min-width: 16rem;
   }
 }
+.slide-fade-enter-active {
+  transition: all 0.1s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
 </style>

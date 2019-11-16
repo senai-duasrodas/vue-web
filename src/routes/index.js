@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard'
 import Cadastros from '../views/Cadastros'
 import Login from '../views/Login'
+import Configurações from '../views/Configurações.vue'
 import CadastroEquipamento from '../views/CadastroEquipamento'
 
 import validate from '../utils/user-validation';
@@ -22,46 +23,47 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'dashboard',
+    name: 'Dashboard',
     component: Dashboard,
     meta: { requireAuth: true }
   },
   {
     path: '/cadastros',
-    name: 'cadastros',
+    name: 'Cadastros',
     component: Cadastros,
+    children: [
+      {
+        path: 'cadastro-equipamento',
+        name: 'Cadastro de equipamentos',
+        component: CadastroEquipamento,
+      },
+    ],
     meta: { requireAuth: true }
   },
   {
     path: '/solicitacoes',
-    name: 'solicitacoes',
+    name: 'Solicitações',
     component: Dashboard,
     meta: { requireAuth: true }
   },
   {
     path: '/consultas',
-    name: 'consultas',
+    name: 'Consultas',
     component: Dashboard,
     meta: { requireAuth: true }
   },
   {
     path: '/relatorios',
-    name: 'relatorios',
+    name: 'Relatórios',
     component: Dashboard,
     meta: { requireAuth: true }
   },
   {
     path: '/configuracoes',
-    name: 'configuracoes',
-    component: Dashboard,
+    name: 'Configurações',
+    component: Configurações,
     meta: { requireAuth: true }
   },
-  {
-    path: '/cadastro-equipamento',
-    name: 'equipamento',
-    component: CadastroEquipamento,
-    meta: { requireAuth: true }
-  }
 ]
 
 const apiUrl = 'http://localhost:3000';

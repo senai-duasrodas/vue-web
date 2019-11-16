@@ -43,7 +43,7 @@ export default {
     .active {
       color: white;
       box-shadow: 1px 1px 5px -3px black;
-      background-color: #F34336;
+      background-color: var(--duas-rodas);
       &:hover {
         background-color: rgb(255, 87, 75);
       }

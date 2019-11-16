@@ -1,19 +1,19 @@
 <template>
   <div class="root-cadastro-view">
-   <div class="content-geral">
-    <div class="contentCard">
-    <card-input title="Ordem de Manutenção" icon="fas fa-pencil-alt" />
-      <card-input title="Centro de Custo" icon="fas fa-pencil-alt" />
-        <router-link to="/cadastro-equipamento">
-          <card-input title="Equipamento" icon="fas fa-pencil-alt" />
-        </router-link>
+    <transition name="slide-fade" mode="out-in">
+      <div v-if="$route.path !== '/cadastros/cadastro-equipamento'" class="card-container d-flex justify-content-center align-items-center flex-column">
+        <div class="card-title d-flex justify-content-center align-items-center">
+          <p>Escolha o tipo de cadastro</p>
+          <p>{{}}</p>
+        </div>
+        <div class="card-wrapper d-flex justify-content-center align-items-center flex-wrap">
+          <div v-for="(card, index) in cards" :key="`card-${index}`">
+            <card-input :title="card.title" :icon="card.icon" :route="card.route" />
+          </div>
+        </div>
       </div>
-      <div class="contentCard">
-        <card-input title="Componentes" icon="fas fa-pencil-alt" />
-        <card-input title="Causa e defeitos" icon="fas fa-pencil-alt" />
-        <card-input title="EPI" icon="fas fa-pencil-alt" />
-      </div>
-    </div>
+    <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -23,44 +23,80 @@ import card from "../components/card/card-option.vue";
 export default {
   components: {
     "card-input": card
-  }
+  },
+
+  data: () => ({
+    cards: [
+      {
+        title: 'Ordem de Manutenção',
+        icon: 'fas fa-pencil-alt',
+        route: ''
+      },
+      {
+        title: 'Centro de Custo',
+        icon: 'fas fa-pencil-alt',
+        route: ''
+      },
+      {
+        title: 'Equipamento',
+        icon: 'fas fa-pencil-alt',
+        route: 'cadastros/cadastro-equipamento'
+      },
+      {
+        title: 'Componentes',
+        icon: 'fas fa-pencil-alt',
+        route: ''
+      },
+      {
+        title: 'Causa e defeitos',
+        icon: 'fas fa-pencil-alt',
+        route: ''
+      },
+      {
+        title: 'EPI',
+        icon: 'fas fa-pencil-alt',
+        route: ''
+      }
+    ]
+  }),
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .root-cadastro-view {
-  .content-geral {
-    .top-bar {
-      margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .card-container {
+    .card-title{
+      p {
+        font-family: 'Montserrat';
+        font-size: 23px;
+        color: #E66E6D;
+      }
     }
-    .menu-items {
-      margin-top: -10px;
+    .card-wrapper {
+      width: 70%;
+    }
+
+    @media screen and (max-width: 1660px) {
+      .card-wrapper {
+        width: 80%;
+      }
+    }
+
+    @media screen and (max-width: 1090px) {
+      .card-wrapper {
+        width: 100%;
+      }
     }
   }
-  .menu-items {
-    width: 17%;
-    float: left;
-    margin-right: 20px;
-  }
-  .content {
-    position: relative;
-    width: 83%;
-    float: left;
-  }
-  .contentCard {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    text-decoration: none;
-  }
-  .text-card {
-    color: #000;
-  }
+
   .slide-fade-enter-active {
-    transition: all 2s ease;
+    transition: all 0.2s ease;
   }
   .slide-fade-leave-active {
-    transition: all 2s cubic-bezier(1, 0.5, 0.8, 1);
+    transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
   }
   .slide-fade-enter,
   .slide-fade-leave-to {
