@@ -9,7 +9,9 @@
         </router-link>
       </div>
       <div class="contentCard">
-        <card-input title="Componentes" icon="fas fa-pencil-alt" />
+        <router-link to="/cadastro-local-instalacao">
+          <card-input title="Local Instalação" icon="fas fa-pencil-alt" />
+        </router-link>
         <card-input title="Causa e defeitos" icon="fas fa-pencil-alt" />
         <card-input title="EPI" icon="fas fa-pencil-alt" />
       </div>

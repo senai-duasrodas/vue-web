@@ -11,7 +11,7 @@
               <h4>Login</h4>
             </div>
             <div>
-              <advanced-input v-model="inputValues.cracha" :label="'Crachá:'" :type="'text'" />
+              <advanced-input v-model="inputValues.numeroCracha" :label="'Crachá:'" :type="'text'" />
             </div>
             <div>
               <advanced-input v-model="inputValues.senha" :label="'Senha:'" :type="'password'" />
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       inputValues: {
-        cracha: '54321',
+        numeroCracha: '54321',
         senha: '12345'
       }
     };
@@ -46,6 +46,7 @@ export default {
   methods: {
     loginValidation() {
       // if (!this.inputValues.cracha && )
+      console.log("valores:" + JSON.stringify(this.inputValues))
       fetch(`${this.$apiUrl}/users`, {
         method: 'post',
         headers: {

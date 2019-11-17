@@ -4,6 +4,7 @@ import Dashboard from '../views/Dashboard'
 import Cadastros from '../views/Cadastros'
 import Login from '../views/Login'
 import CadastroEquipamento from '../views/CadastroEquipamento'
+import CadastroLocalInstalacao from '../views/CadastroLocalInstalacao'
 
 import validate from '../utils/user-validation';
 import Swal from 'sweetalert2'
@@ -60,6 +61,12 @@ const routes = [
     path: '/cadastro-equipamento',
     name: 'equipamento',
     component: CadastroEquipamento,
+    meta: { requireAuth: true }
+  },
+  {
+    path: '/cadastro-local-instalacao',
+    name: 'Local Instalação',
+    component: CadastroLocalInstalacao,
     meta: { requireAuth: true }
   }
 ]
