@@ -1,57 +1,99 @@
 <template>
-    <div>
-        <div class="fundoEquipamento">
-            <div class="wrapper">
-                <div class="cadCard">
-                    <div>
-                        <advanced-input v-model="inputValues.cracha" :label="'Local Instalação:'" :type="'text'" />
-                    </div>
-                    <div>
-                        <advanced-input v-model="inputValues.cracha" :label="'Equipamento:'" :type="'text'" />
-                    </div>
-                    <div>
-                        <advanced-input v-model="inputValues.cracha" :label="'Equipamento Superior:'" :type="'text'" />
-                    </div>
-                    <textarea name="descricao" id="descricacaoEquipamento" cols="30" rows="3"></textarea>
-                </div>
+  <div>
+    <div class="equipmentBackground">
+      <div class="wrapper">
+        <div class="cadCard">
+          <div class="inputs">
+            <simple-input v-model="inputValues.sector" :label="'Local Instalação:'" :type="'text'" />
+          </div>
+          <div class="sideInput">
+            <div class="inputsSidePosition">
+              <simple-input v-model="inputValues.equipment" :label="'Equipamento:'" :type="'text'" />
             </div>
+            <div class="inputsSidePosition">
+              <simple-input
+                v-model="inputValues.superiorEquipment"
+                :label="'Equipamento Superior:'"
+                :type="'text'"
+              />
+            </div>
+          </div>
+          <div class="textAreaDescription">
+            <!--<div><textarea name="descricao" id="descricacaoEquipamento" cols="59" rows="3"></textarea></div>-->
+            <description
+              v-model="inputValues.description"
+              :cols="1"
+              :rows="3"
+              :label="'Descrição:'"
+            />
+          </div>
         </div>
+        <div class="d-flex justify-content-center m-3">
+          <b-button type="submit" value="send" variant="danger">Cadastrar</b-button>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import advancedInput from '../components/inputs/advanced-input'
+import simpleInput from "../components/inputs/simple-input";
+import description from "../components/inputs/description";
 
 export default {
-    components: {
-        'advanced-input': advancedInput,
+  components: {
+    "simple-input": simpleInput,
+    description: description
   },
   data() {
     return {
       inputValues: {
-        setor: '',
-        senha: ''
+        sector: "",
+        equipment: "",
+        superiorEquipment: "",
+        description: ""
       }
     };
-  },
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.fundoEquipamento {
+.equipmentBackground {
   position: relative;
   width: 100%;
   height: 100%;
+  padding-top: 3%;
   .wrapper {
     flex-direction: column;
     align-items: center;
     .cadCard {
-      height: 400px;
-      width: 500px;
+      padding-top: 2%;
+      height: 23rem;
+      width: 60%;
       display: flex;
-      justify-content: center;
-      border-radius: 3px;
+      flex-direction: column;
+      border-radius: 10px;
       background-color: #f8f9fa !important;
+      .inputs {
+        padding-left: 3.5%;
+        padding-right: 3.5%;
+      }
+      .textAreaDescription {
+        box-sizing: border-box;
+        padding-left: 4%;
+        padding-right: 4%;
+      }
+    }
+    .sideInput {
+      display: flex;
+      align-self: center;
+      width: 100%;
+      .inputsSidePosition {
+        padding-left: 3.5%;
+        padding-right: 3.5%;
+        width: 50%;
+      }
     }
   }
 }
