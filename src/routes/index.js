@@ -37,6 +37,7 @@ const routes = [
         path: 'cadastro-equipamento',
         name: 'Cadastro de equipamentos',
         component: CadastroEquipamento,
+        meta: { requireAuth: true }
       },
       {
         path: '/cadastro-equipamento',

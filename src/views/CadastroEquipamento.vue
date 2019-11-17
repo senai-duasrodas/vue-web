@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <div class="equipmentBackground">
-      <div class="wrapper">
+  <div class="equipmentBackground">
+    <div class="wrapper">
+      <form @submit.prevent="registerEquipment()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
             <simple-input v-model="inputValues.sector" :label="'Local Instalação:'" :type="'text'" />
@@ -31,7 +31,7 @@
         <div class="d-flex justify-content-center m-3">
           <b-button type="submit" value="send" variant="danger">Cadastrar</b-button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -54,19 +54,47 @@ export default {
         description: ""
       }
     };
-  }
+  },
+  methods: {
+    registerEquipment(){
+      const token = localStorage.getItem('token')
+       fetch(`${this.$apiUrl}/equipamento`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(this.inputValues)
+      }).then(res => res.json())
+        .then(json => {
+          if (json.statusCode === 404) return this.$swal({
+            type: 'error',
+            title: `Ops! ${json.err}`,
+            confirmButtonColor: '#F34336',
+          })
+          this.$swal({
+            type: 'success',
+            title: `${json.response}`,
+            confirmButtonColor: '#F34336',
+          })
+        })
+    }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .equipmentBackground {
-  position: relative;
+  display: flex;
   width: 100%;
   height: 100%;
   padding-top: 3%;
   .wrapper {
-    flex-direction: column;
-    align-items: center;
+    .formPosition{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width:100%;
     .cadCard {
       padding-top: 2%;
       height: 23rem;
@@ -94,6 +122,7 @@ export default {
         padding-right: 3.5%;
         width: 50%;
       }
+    }
     }
   }
 }

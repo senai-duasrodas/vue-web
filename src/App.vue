@@ -73,9 +73,6 @@ body {
     .topbar-content {
       width: 100%;
       padding: 20px;
-      position: sticky;
-      top: 0px;
-      z-index: 10;
     }
     .router-content {
       box-sizing: border-box;
