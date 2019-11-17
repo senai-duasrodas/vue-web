@@ -11,9 +11,10 @@
 
           <template v-if="!isEditing">
             <div class="accordion-content bg-white mt-3 p-3 d-flex flex-wrap">
-              <div v-for="(user, index) in users" :key="`user-${index}`">
-                <span>{{user.nome}}</span>
-              </div>
+              <custom-table 
+                :contents="users"
+                :headers="tableHeadConfig"
+              />
             </div>
 
           </template>
@@ -87,12 +88,14 @@
 import accordion from '../components/accordion/accordion';
 import simpleInput from '../components/inputs/simple-input';
 import saveButton from '../components/button/save-button';
+import table from '../components/table/table';
 
 export default {
   components: {
     accordion,
     'simples-input': simpleInput,
     'save-button': saveButton,
+    'custom-table': table,
   },
 
   data() {
@@ -108,6 +111,12 @@ export default {
       },
       users: [],
       isEditing: false,
+      tableHeadConfig: [
+        { name: 'Nome', size: '25%' },
+        { name: 'Cracha', size: '10%' },
+        { name: 'E-mail', size: '20%' },
+        { name: 'Nível de acesso', size: '10%' },
+      ]
     };
   },
 
