@@ -32,15 +32,19 @@ export default {
     dashboard
   }),
 
+  created() {
+    console.log(this.$route.name);
+  },
+
   methods: {
     currentRoute(routes) {
-      return routes.toLowerCase() === this.$route.name.toLowerCase();
+      return routes.toLowerCase() === this.$route.matched[0].name.toLowerCase();
     }
   },
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .root-sidebar{
   .hr {
     margin: 0 auto;

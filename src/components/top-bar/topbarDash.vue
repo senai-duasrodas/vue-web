@@ -2,7 +2,10 @@
   <div class="root-topbar">
     <div class="container-wrapper">
       <div class="tituloTop">
-        <span>
+        <span v-if="$route.matched.length > 1">
+          {{ $route.matched[0].name }} |
+        </span>
+        <span :class="{'small-text' : $route.matched.length > 1}">
           {{ $route.name }}
         </span>
       </div>
@@ -10,16 +13,19 @@
       <div class="name-notification">
         <i class="fas fa-bell" />
         <span>|</span>
+
         <b-dropdown size="lg" right variant="link" toggle-class="text-decoration-none p-0" no-caret>
           <template v-slot:button-content>
             <i class="fas fa-user" />
           </template>
+
           <b-dropdown-item href="#">
             <i class="fas fa-id-card-alt" />
             <span>
               Meu perfil
             </span>
           </b-dropdown-item>
+
           <b-dropdown-item @click="logoff()" toggle-class="red">
             <i class="fas fa-sign-out-alt" />
             <span>
@@ -39,12 +45,17 @@ export default {
   },
   data() {
     return {
-
+      // route: this.$route.name,
     }
+  },
+
+  mounted() {
+    console.log(this.$route);
   },
 
   methods: {
     logoff() {
+      console.log(this.$route);
       this.$swal({
         type: 'question',
         title: 'Deseja realmente sair do sistema?',
@@ -64,12 +75,13 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 .root-topbar {
   width: 100%;
-  height: 65px;
+  min-height: 65px;
   padding: 20px;
   background: #ffff;
+  box-shadow: 1px 2px 4px -1px rgb(194, 194, 194);
   border-radius: 42px;
   .container-wrapper {
     display: flex;
@@ -80,6 +92,9 @@ export default {
         font-size: 20px;
         font-family: 'Montserrat';
         color: #979797
+      }
+      .small-text {
+        font-size: 16px;
       }
     }
     .name-notification {

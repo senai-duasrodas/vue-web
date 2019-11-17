@@ -1,14 +1,16 @@
 <template>
 	<div class="root-card-option-component">
 		<div class="card-option shadow">
-			<div class="card-wrapper">
-				<div class="icon-card">
-					<i :class="icon" class="fa-3x"></i>
+			<router-link class="text-decoration-none text-muted" :to="route">
+				<div class="card-wrapper">
+					<div class="icon-card">
+						<i :class="icon" class="fa-2x"></i>
+					</div>
+					<div>
+						<span class="text-muted">{{ title }}</span>
+					</div>
 				</div>
-				<div class="text-card">
-					<span>{{ title }}</span>
-				</div>
-			</div>
+			</router-link>
 		</div>
 	</div>
 </template>
@@ -17,23 +19,27 @@
 export default {
 	props:{
 		title: { type: String, default: '' },
-		icon: { type: String, default: '' }
+		icon: { type: String, default: '' },
+		route: { type: String, default: '' }
 	}
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .root-card-option-component {
 	.card-option {
-		position: relative;
-		background-color: #f8f9fa !important;
-		width: 300px;
-		height: 200px;
+		background-color: #f8f9fa;
+		min-width: 250px;
+		min-height: 200px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		border-radius: 2px;
-		margin-left:40px;
+		border-radius: 6px;
+		margin: 30px;
+		transition: 0.2s;
+		&:hover {
+			transform: scale(1.09);
+		}
 		.card-wrapper {
 			display: flex;
 			flex-direction: column;
@@ -43,21 +49,10 @@ export default {
 			div {
 				margin: 10px;
 			}
+			i {
+				color: #E66E6D;
+			}
 		}
 	}
-	.fa-pencil-alt {
-		color: red;
-	}
-	.slide-fade-enter-active {
-    transition: all 2s ease;
-  }
-  .slide-fade-leave-active {
-    transition: all 2s cubic-bezier(1, 0.5, 0.8, 1);
-  }
-  .slide-fade-enter,
-  .slide-fade-leave-to {
-    transform: translateX(10px);
-    opacity: 0;
-  }
 }
 </style>
