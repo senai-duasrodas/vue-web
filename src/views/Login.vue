@@ -46,6 +46,7 @@ export default {
   methods: {
     loginValidation() {
       // if (!this.inputValues.cracha && )
+      console.log("valores:" + JSON.stringify(this.inputValues))
       fetch(`${this.$apiUrl}/users`, {
         method: 'post',
         headers: {

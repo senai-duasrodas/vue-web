@@ -43,9 +43,9 @@ export default {
         route: 'cadastros/cadastro-equipamento'
       },
       {
-        title: 'Componentes',
+        title: 'Local de instalção',
         icon: 'fas fa-pencil-alt',
-        route: ''
+        route: 'cadastros/cadastro-local-instalacao'
       },
       {
         title: 'Causa e defeitos',
@@ -56,7 +56,7 @@ export default {
         title: 'EPI',
         icon: 'fas fa-pencil-alt',
         route: ''
-      }
+      },
     ]
   }),
 };
