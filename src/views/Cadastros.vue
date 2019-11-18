@@ -4,7 +4,6 @@
       <div v-if="$route.path !== '/cadastros/cadastro-equipamento'" class="card-container d-flex justify-content-center align-items-center flex-column">
         <div class="card-title d-flex justify-content-center align-items-center">
           <p>Escolha o tipo de cadastro</p>
-          <p>{{}}</p>
         </div>
         <div class="card-wrapper d-flex justify-content-center align-items-center flex-wrap">
           <div v-for="(card, index) in cards" :key="`card-${index}`">

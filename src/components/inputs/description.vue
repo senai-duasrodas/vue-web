@@ -5,11 +5,11 @@
     </div>
     <div class="d-flex">
       <textarea
-        v-model="value"
+        v-model="model"
         :cols="cols"
         :rows="rows"
-        @keyup="sendValue"
         class="custom-input w-100 p-2 rounded"
+        required
       >
       </textarea>
     </div>
@@ -21,18 +21,24 @@ export default {
   props: {
     label: { type: String, default: () => '' },
     cols: { type: String, default: () => '' },
-    rows: { type: String, default: () => '' }
+    rows: { type: String, default: () => '' },
+    value: { type: String, default: '' }
   },
 
   data() {
     return {
-      value: ''
     }
   },
+  
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
 
-  methods: {
-    sendValue() {
-      this.$emit('value', this.value)
+      set(val) {
+        this.$emit('input', val)
+      } 
     }
   }
 }
