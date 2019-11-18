@@ -54,7 +54,7 @@ export default {
       {
         title: 'Causa e sintoma',
         icon: 'fas fa-pencil-alt',
-        route: ''
+        route: 'cadastros/cadastro-causa-sintoma'
       },
       {
         title: 'EPI',

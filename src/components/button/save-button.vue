@@ -1,7 +1,7 @@
 <template>
   <div class="root-save-button-componenet">
     <div class="d-flex justify-content-center">
-      <button type="submit" value="send" class="save-button m-3" :class="{'cancel' : color}">
+      <button type="submit" value="send" class="save-button m-3">
         {{ label }}
       </button>
     </div>
@@ -12,7 +12,6 @@
 export default {
   props: {
     label: { type: String, default: '' },
-    color: { type: Boolean, default: false },
   },
 
   data: () => ({
@@ -41,9 +40,6 @@ export default {
       transform: scale(1);
       border-radius: 9px;
     }
-  }
-  .cancel {
-    background-color: var(--gray) !important;
   }
 }
 </style>

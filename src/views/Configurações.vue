@@ -82,9 +82,9 @@
               <div class="p-2 m-2 w-25">
                 <simples-input v-model="userInputValues.numeroCracha" label="Cracha" type="number"></simples-input>
               </div>
-              <!-- <div class="p-2 m-2 w-25">
-                <simples-input v-model="funcao" label="Função" type="text"></simples-input>
-              </div> -->
+              <div class="p-2 m-2 w-25">
+                <simples-input v-model="userInputValues.funcao" label="Função" type="text"></simples-input>
+              </div>
               <div class="p-2 m-2 w-25">
                 <simples-input v-model="userInputValues.nivelAcesso" label="Nível de acesso" type="number"></simples-input>
               </div>
@@ -128,7 +128,7 @@ export default {
       userInputValues: {
         nome: '',
         numeroCracha: '',
-        // funcao: '',
+        funcao: '',
         email: '',
         senha: '',  
         nivelAcesso: ''
