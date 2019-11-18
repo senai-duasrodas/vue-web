@@ -1,17 +1,11 @@
 <template>
   <div class="container p-2">
     <div class="input-container mt-3">
-      <select
-        :id="label"
-        v-model="model"
-        class="input p-3"
-        :type="type"
-        pattern=".+"
-        :placeholder="placeholder"
-        required
-      />
-      <!--<option v-for="opcaoSelect in opcoesSelect "></option>-->
-      <label class="label p-2" :for="label">{{ label }}</label>
+      <b-form-select v-model="model" required>
+        <template v-for="(option, index) in selectOptions">
+          <option :value="option" :key="`option-${index}`">{{option}}</option>
+        </template>
+      </b-form-select>
     </div>
   </div>
 </template>
@@ -19,9 +13,9 @@
 <script>
 export default {
   props: {
-    label: { type: String, default: () => '' },
-    type: { type: String, default: () => '' },
-    placeholder: { type: String, default: () => '' },
+    label: { type: String, default: '' },
+    selectOptions: { type: Array, default: () => [] },
+    placeholder: { type: String, default: '' },
     value: { type: String, default: '' }
   },
 
@@ -81,7 +75,7 @@ export default {
 .input,
 .label {
   width: 100%;
-  height: 3rem;
+  height: 4rem;
   font-size: 1rem;
 }
 

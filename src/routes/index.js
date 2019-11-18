@@ -8,6 +8,7 @@ import CadastroEquipamento from '../views/CadastroEquipamento'
 import CadastroLocalInstalacao from '../views/CadastroLocalInstalacao'
 import CadastroCentroTrabalho from '../views/CadastroCentroTrabalho'
 import CadastroTipoOrdem from '../views/CadastroTipoOrdem'
+import CadastroCausaSintoma from '../views/CadastroCausaSintoma.vue'
 
 import validate from '../utils/user-validation';
 import Swal from 'sweetalert2'
@@ -57,6 +58,12 @@ const routes = [
         path: 'cadastro-tipo-ordem',
         name: 'Tipo de Ordem',
         component: CadastroTipoOrdem,
+        meta: { requireAuth: true }
+      },
+      {
+        path: 'cadastro-causa-sintoma',
+        name: 'Causa e Sintoma',
+        component: CadastroCausaSintoma,
         meta: { requireAuth: true }
       },
     ],

@@ -33,12 +33,12 @@
             </span>
           </b-dropdown-item>
         </b-dropdown>
-        <div class="UserLogin">
+        <!-- <div class="UserLogin">
           <ul>
             <li class="UserNameStyle">Ronei Roteski</li>
             <li class="text-danger">Administrador</li>
           </ul>
-        </div>
+        </div> -->
         
       </div>
     </div>
@@ -86,7 +86,7 @@ export default {
 .root-topbar {
   width: 100%;
   min-height: 65px;
-  padding: 10px;
+  padding: 20px;
   background: #ffff;
   box-shadow: 1px 2px 4px -1px rgb(194, 194, 194);
   border-radius: 42px;
