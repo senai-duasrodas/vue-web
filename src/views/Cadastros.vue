@@ -1,7 +1,7 @@
 <template>
   <div class="root-cadastro-view">
     <transition name="slide-fade" mode="out-in">
-      <div v-if="$route.path !== '/cadastros/cadastro-equipamento'" class="card-container d-flex justify-content-center align-items-center flex-column">
+      <div v-if="$route.path !== '/cadastros/cadastro-equipamento' && $route.path !== '/cadastros/cadastro-local-instalacao' && $route.path !== '/cadastros/cadastro-centro-trabalho' && $route.path !== '/cadastros/cadastro-tipo-ordem' " class="card-container d-flex justify-content-center align-items-center flex-column">
         <div class="card-title d-flex justify-content-center align-items-center">
           <p>Escolha o tipo de cadastro</p>
         </div>
@@ -32,11 +32,6 @@ export default {
         route: ''
       },
       {
-        title: 'Centro de Custo',
-        icon: 'fas fa-pencil-alt',
-        route: ''
-      },
-      {
         title: 'Equipamento',
         icon: 'fas fa-pencil-alt',
         route: 'cadastros/cadastro-equipamento'
@@ -45,6 +40,16 @@ export default {
         title: 'Local de instalção',
         icon: 'fas fa-pencil-alt',
         route: 'cadastros/cadastro-local-instalacao'
+      },
+      {
+        title: 'Centro de Trabalho',
+        icon: 'fas fa-pencil-alt',
+        route: 'cadastros/cadastro-centro-trabalho'
+      },
+      {
+        title: 'Tipo de Ordem',
+        icon: 'fas fa-pencil-alt',
+        route: 'cadastros/cadastro-tipo-ordem'
       },
       {
         title: 'Causa e defeitos',
