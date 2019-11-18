@@ -29,8 +29,8 @@ export default {
 .root-card-option-component {
 	.card-option {
 		background-color: #f8f9fa;
-		min-width: 250px;
-		min-height: 200px;
+		width: 250px;
+		height: 200px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -48,10 +48,21 @@ export default {
 			padding: 10px;
 			div {
 				margin: 10px;
+				display: flex;
+				span {
+					text-align: center;
+				}
 			}
 			i {
 				color: #E66E6D;
 			}
+		}
+	}
+
+	@media screen and (max-width: 1366px) {
+		.card-option {
+			width: 200px;
+			height: 150px;
 		}
 	}
 }

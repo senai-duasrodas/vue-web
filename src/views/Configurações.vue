@@ -1,6 +1,6 @@
 <template>
   <div class="root-configuracoes-view">
-    <div class="w-75 p-3">
+    <div class="wrapper-configuration p-3">
 
       <div class="label-text">
         <span class="text-muted">Usuários</span>
@@ -8,45 +8,67 @@
 
       <div class="accordion-container mb-3">
         <accordion title="Gerenciar usuário" icon="fas fa-user-edit">
-
-          <template v-if="!isEditing">
-            <div class="accordion-content bg-white mt-3 p-3 d-flex flex-wrap">
-              <custom-table 
-                :contents="users"
-                :headers="tableHeadConfig"
-              />
-            </div>
-
-          </template>
-
-          <template v-if="isEditing">
-            <form @submit.prevent="updateUser">
-              <div class="accordion-content bg-white mt-3 p-3 d-flex flex-wrap">
-                <div class="p-2 m-2 w-25">
-                  <simples-input v-model="userInputValues.nome" label="Nome" type="text"></simples-input>
-                </div>
-                <div class="p-2 m-2 w-25">
-                  <simples-input v-model="userInputValues.cracha" label="Cracha" type="number"></simples-input>
-                </div>
-                <!-- <div class="p-2 m-2 w-25">
-                  <simples-input v-model="funcao" label="Função" type="text"></simples-input>
-                </div> -->
-                <div class="p-2 m-2 w-25">
-                  <simples-input v-model="userInputValues.nivelAcesso" label="Nível de acesso" type="number"></simples-input>
-                </div>
-                <div class="p-2 m-2 w-25">
-                  <simples-input v-model="userInputValues.email" label="E-mail" type="email"></simples-input>
-                </div>
-                <div class="p-2 m-2 w-25">
-                  <simples-input v-model="userInputValues.senha" label="Senha" type="password"></simples-input>
+          <transition name="slide-fade" mode="out-in">
+            <template v-if="!isEditing">
+              <div class="accordion-content bg-white mt-3 p-4">
+                <div class="table-responsive">
+                  <table class="table table table-striped table-borderless table-hover" cellspacing="0">
+                    <thead class="table-head">
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Crachá</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Nível de acesso</th>
+                        <th scope="col">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-body">
+                      <tr v-for="(user, index) in users" :key="`user-${index}`">
+                        <td>{{ user.nome }}</td>
+                        <td>{{ user.numeroCracha }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.nivelAcesso }}</td>
+                        <td style="width: 50px">
+                          <div class="d-flex table-action">
+                            <i class="fas fa-edit text-muted" @click="isEditing = !isEditing"></i>
+                            <i class="fas fa-trash text-muted" @click="deleteUser(user, index)"></i>
+                          </div> 
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <div class="save">
-                <save-button label="Cadastrar" />
-              </div>
-            </form>
-          </template>
+            </template>
+          </transition>
 
+          <transition name="slide-fade" mode="out-in">
+            <template v-if="isEditing">
+              <form @submit.prevent="updateUser">
+                <div class="accordion-content bg-white mt-3 p-3 d-flex flex-wrap">
+                  <div class="p-2 m-2 w-25">
+                    <simples-input v-model="userInputValues.nome" label="Nome" type="text"></simples-input>
+                  </div>
+                  <div class="p-2 m-2 w-25">
+                    <simples-input v-model="userInputValues.cracha" label="Cracha" type="number"></simples-input>
+                  </div>
+                  <div class="p-2 m-2 w-25">
+                    <simples-input v-model="userInputValues.nivelAcesso" label="Nível de acesso" type="number"></simples-input>
+                  </div>
+                  <div class="p-2 m-2 w-25">
+                    <simples-input v-model="userInputValues.email" label="E-mail" type="email"></simples-input>
+                  </div>
+                  <div class="p-2 m-2 w-25">
+                    <simples-input v-model="userInputValues.senha" label="Senha" type="password"></simples-input>
+                  </div>
+                </div>
+                <div class="save d-flex justify-content-center">
+                  <save-button label="Alterar" />
+                  <cancel-button label="Cancelar" @click.native="isEditing = !isEditing" />
+                </div>
+              </form>
+            </template>
+          </transition>
         </accordion>
       </div>
 
@@ -58,7 +80,7 @@
                 <simples-input v-model="userInputValues.nome" label="Nome" type="text"></simples-input>
               </div>
               <div class="p-2 m-2 w-25">
-                <simples-input v-model="userInputValues.cracha" label="Cracha" type="number"></simples-input>
+                <simples-input v-model="userInputValues.numeroCracha" label="Cracha" type="number"></simples-input>
               </div>
               <!-- <div class="p-2 m-2 w-25">
                 <simples-input v-model="funcao" label="Função" type="text"></simples-input>
@@ -88,6 +110,7 @@
 import accordion from '../components/accordion/accordion';
 import simpleInput from '../components/inputs/simple-input';
 import saveButton from '../components/button/save-button';
+import cancelButton from '../components/button/cancel-button';
 import table from '../components/table/table';
 
 export default {
@@ -95,6 +118,7 @@ export default {
     accordion,
     'simples-input': simpleInput,
     'save-button': saveButton,
+    'cancel-button': cancelButton,
     'custom-table': table,
   },
 
@@ -103,7 +127,7 @@ export default {
       token: '',
       userInputValues: {
         nome: '',
-        cracha: '',
+        numeroCracha: '',
         // funcao: '',
         email: '',
         senha: '',  
@@ -111,12 +135,6 @@ export default {
       },
       users: [],
       isEditing: false,
-      tableHeadConfig: [
-        { name: 'Nome', size: '25%' },
-        { name: 'Cracha', size: '10%' },
-        { name: 'E-mail', size: '20%' },
-        { name: 'Nível de acesso', size: '10%' },
-      ]
     };
   },
 
@@ -166,12 +184,53 @@ export default {
             type: 'success',
             title: `${json.msg}`,
             confirmButtonColor: '#F34336',
+          }).then(res => {
+            this.users.push(this.userInputValues);
+            this.resetModel();
           })
         })
     },
 
     updateUser() {
 
+    },
+
+    deleteUser(user, index) {
+      console.log(user);
+      this.$swal({
+        type: 'question',
+        title: `Deseja mesmo remover o usuário ${user.nome}?`,
+        showCancelButton: true,
+        confirmButtonColor: '#F34336',
+        preConfirm: () => {
+          fetch(`${this.$apiUrl}/users/${user.numeroCracha}`, {
+            method: 'delete',
+            headers: {
+              'Content-Type': 'application/json',
+              'authorization': `Bearer ${this.token}`
+            }
+          }).then(res => res.json())
+            .then(json => {
+              if (json.statusCode === 404) return this.$swal({
+                type: 'warning',
+                title: json.err,
+                confirmButtonColor: '#F34336',
+              })
+              this.$swal({
+                type: 'success',
+                title: json.msg,
+                confirmButtonColor: '#F34336',
+              }).then(res => {
+                this.users.splice(index, 1)
+                console.log(this.users);
+              })
+            })
+        }
+      })
+    },
+
+    resetModel() {
+      this.userInputValues = {}
     }
   },
 }
@@ -182,6 +241,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  .wrapper-configuration {
+    width: 75%
+  }
+  @media screen and (max-width: 1366px) { 
+    .wrapper-configuration {
+      width: 90%
+    }
+  }
   .label-text {
     span {
       font-family: 'Montserrat';
@@ -190,6 +257,48 @@ export default {
   }
   .accordion-content {
     border-radius: 10px;
+    table {
+      overflow:hidden;
+      border-collapse:separate;
+      border-radius: 10px;
+    }
+    .table-head {
+      background-color: var(--duas-rodas);
+      color: white;
+      th {
+        padding: 20px;
+      }
+    }
+    .table-body {
+      td {
+        padding: 20px;
+      }
+    }
+    .table-action {
+      i {
+        margin: 0 10px;
+        cursor: pointer;
+        transition: .1s;
+        &:hover {
+          transform: scale(1.3);
+        }
+        &:active {
+          transform: scale(1);
+        }
+      }
+    }
   }
+}
+
+.slide-fade-enter-active {
+  transition: all 0.1s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

@@ -38,6 +38,7 @@ export default {
 
   methods: {
     currentRoute(routes) {
+      console.log(routes, 'and', this.$route);
       return routes.toLowerCase() === this.$route.matched[0].name.toLowerCase();
     }
   },

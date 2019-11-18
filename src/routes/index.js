@@ -42,19 +42,7 @@ const routes = [
         meta: { requireAuth: true }
       },
       {
-        path: '/cadastro-equipamento',
-        name: 'equipamento',
-        component: CadastroEquipamento,
-        meta: { requireAuth: true }
-      },
-      {
         path: 'cadastro-local-instalacao',
-        name: 'Local Instalação',
-        component: CadastroLocalInstalacao,
-        meta: { requireAuth: true }
-      },
-      {
-        path: '/cadastro-local-instalacao',
         name: 'Local Instalação',
         component: CadastroLocalInstalacao,
         meta: { requireAuth: true }
@@ -66,19 +54,7 @@ const routes = [
         meta: { requireAuth: true }
       },
       {
-        path: '/cadastro-centro-trabalho',
-        name: 'Centro de Trabalho',
-        component: CadastroCentroTrabalho,
-        meta: { requireAuth: true }
-      },
-      {
         path: 'cadastro-tipo-ordem',
-        name: 'Tipo de Ordem',
-        component: CadastroTipoOrdem,
-        meta: { requireAuth: true }
-      },
-      {
-        path: '/cadastro-tipo-ordem',
         name: 'Tipo de Ordem',
         component: CadastroTipoOrdem,
         meta: { requireAuth: true }
