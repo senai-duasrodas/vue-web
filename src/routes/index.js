@@ -40,13 +40,7 @@ const routes = [
         meta: { requireAuth: true }
       },
       {
-        path: '/cadastro-equipamento',
-        name: 'equipamento',
-        component: CadastroEquipamento,
-        meta: { requireAuth: true }
-      },
-      {
-        path: '/cadastro-local-instalacao',
+        path: 'cadastro-local-instalacao',
         name: 'Local Instalação',
         component: CadastroLocalInstalacao,
         meta: { requireAuth: true }

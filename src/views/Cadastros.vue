@@ -1,7 +1,7 @@
 <template>
   <div class="root-cadastro-view">
     <transition name="slide-fade" mode="out-in">
-      <div v-if="$route.path !== '/cadastros/cadastro-equipamento'" class="card-container d-flex justify-content-center align-items-center flex-column">
+      <div v-if="$route.path === '/cadastros'" class="card-container d-flex justify-content-center align-items-center flex-column">
         <div class="card-title d-flex justify-content-center align-items-center">
           <p>Escolha o tipo de cadastro</p>
         </div>
@@ -47,7 +47,7 @@ export default {
         route: 'cadastros/cadastro-local-instalacao'
       },
       {
-        title: 'Causa e defeitos',
+        title: 'Causa e sintoma',
         icon: 'fas fa-pencil-alt',
         route: ''
       },
