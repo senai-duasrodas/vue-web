@@ -10,11 +10,27 @@
         <accordion title="Gerenciar usuário" icon="fas fa-user-edit">
 
           <template v-if="!isEditing">
-            <div class="accordion-content bg-white mt-3 p-3 d-flex flex-wrap">
-              <custom-table 
-                :contents="users"
-                :headers="tableHeadConfig"
-              />
+            <div class="accordion-content bg-white mt-3 p-4">
+                <table class="w-100" cellspacing="0">
+                  <thead class="table-head">
+                    <tr>
+                      <th>Nome</th>
+                      <th>Crachá</th>
+                      <th>E-mail</th>
+                      <th>Nível de acesso</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body">
+                    <tr v-for="(user, index) in users" :key="`user-${index}`">
+                      <td>{{ user.nome }}</td>
+                      <td>{{ user.numeroCracha }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.nivelAcesso }}</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
             </div>
 
           </template>
@@ -111,12 +127,6 @@ export default {
       },
       users: [],
       isEditing: false,
-      tableHeadConfig: [
-        { name: 'Nome', size: '25%' },
-        { name: 'Cracha', size: '10%' },
-        { name: 'E-mail', size: '20%' },
-        { name: 'Nível de acesso', size: '10%' },
-      ]
     };
   },
 
@@ -190,6 +200,23 @@ export default {
   }
   .accordion-content {
     border-radius: 10px;
+    table {
+      overflow:hidden;
+      border-collapse:separate;
+      border-radius: 10px;
+    }
+    .table-head {
+      background-color: var(--duas-rodas);
+      color: white;
+      th {
+        padding: 20px;
+      }
+    }
+    .table-body {
+      td {
+        padding: 20px;
+      }
+    }
   }
 }
 </style>
