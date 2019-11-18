@@ -4,7 +4,7 @@
       <form @submit.prevent="registerEquipment()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
-            <simple-input v-model="inputValues.sector" :label="'Local Instalação:'" :type="'text'" />
+            <simple-input v-model="inputValues.workCenter" :label="'Centro de Trabalho:'" :type="'text'" />
           </div>
         </div>
         <div class="d-flex justify-content-center m-3">
@@ -27,14 +27,14 @@ export default {
   data() {
     return {
       inputValues: {
-        sector: ""
+        workCenter: ""
       }
     };
   },
   methods: {
     registerEquipment(){
       const token = localStorage.getItem('token')
-       fetch(`${this.$apiUrl}/local-instalacao`, {
+       fetch(`${this.$apiUrl}/centro-trabalho`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',

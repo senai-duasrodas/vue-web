@@ -4,7 +4,7 @@
       <form @submit.prevent="registerEquipment()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
-            <simple-input v-model="inputValues.sector" :label="'Local Instalação:'" :type="'text'" />
+            <simple-input v-model="inputValues.orderType" :label="'Tipo de Ordem:'" :type="'text'" />
           </div>
         </div>
         <div class="d-flex justify-content-center m-3">
@@ -27,14 +27,14 @@ export default {
   data() {
     return {
       inputValues: {
-        sector: ""
+        orderType: ""
       }
     };
   },
   methods: {
     registerEquipment(){
       const token = localStorage.getItem('token')
-       fetch(`${this.$apiUrl}/local-instalacao`, {
+       fetch(`${this.$apiUrl}/tipo-ordem`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',

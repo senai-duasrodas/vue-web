@@ -61,7 +61,7 @@ export default {
           })
           try {
             await this.setTokenLocalStorage(json);
-
+            
             this.$swal({
               position: 'top',
               type: 'success',

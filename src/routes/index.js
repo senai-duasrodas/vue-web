@@ -6,6 +6,8 @@ import Login from '../views/Login'
 import Configurações from '../views/Configurações.vue'
 import CadastroEquipamento from '../views/CadastroEquipamento'
 import CadastroLocalInstalacao from '../views/CadastroLocalInstalacao'
+import CadastroCentroTrabalho from '../views/CadastroCentroTrabalho'
+import CadastroTipoOrdem from '../views/CadastroTipoOrdem'
 
 import validate from '../utils/user-validation';
 import Swal from 'sweetalert2'
@@ -44,7 +46,19 @@ const routes = [
         name: 'Local Instalação',
         component: CadastroLocalInstalacao,
         meta: { requireAuth: true }
-      }
+      },
+      {
+        path: 'cadastro-centro-trabalho',
+        name: 'Centro de Trabalho',
+        component: CadastroCentroTrabalho,
+        meta: { requireAuth: true }
+      },
+      {
+        path: 'cadastro-tipo-ordem',
+        name: 'Tipo de Ordem',
+        component: CadastroTipoOrdem,
+        meta: { requireAuth: true }
+      },
     ],
     meta: { requireAuth: true }
   },
