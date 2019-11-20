@@ -139,29 +139,21 @@ export default {
   },
 
   mounted() {
-    this.token = localStorage.getItem('token')
     this.getUsers()
-    console.log(this.users);
   },
 
   methods: {
     getUsers() {
       console.log('hereee');
-      fetch(`${this.$apiUrl}/users/get`, {
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': `Bearer ${this.token}`
-        },
-      }).then(res => res.json())
-        .then(json => {
-          if (json.query.length === 0) this.$swal({
-            type: 'warning',
-            title: 'Não foi encontrado nenhum usuário cadastro!',
-            confirmButtonColor: '#F34336',
-          })
-          json.query.forEach(i => this.users.push(i))
+      this.$http.methodGet('users/get', localStorage.getItem('token')).then(res => {
+        if (res.query.length === 0) this.$swal({
+          type: 'warning',
+          title: 'Não foi encontrado nenhum usuário cadastro!',
+          confirmButtonColor: '#F34336',
         })
+        res.query.forEach(i => this.users.push(i))
+      })
+      
     },
 
     register() {

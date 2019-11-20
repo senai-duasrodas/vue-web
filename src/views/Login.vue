@@ -37,16 +37,14 @@ export default {
   data() {
     return {
       inputValues: {
-        numeroCracha: '54321',
-        senha: '12345'
+        numeroCracha: '12035',
+        senha: '123'
       }
     };
   },
 
   methods: {
     loginValidation() {
-      // if (!this.inputValues.cracha && )
-      console.log("valores:" + JSON.stringify(this.inputValues))
       fetch(`${this.$apiUrl}/users`, {
         method: 'post',
         headers: {
