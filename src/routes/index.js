@@ -9,6 +9,7 @@ import CadastroLocalInstalacao from '../views/CadastroLocalInstalacao'
 import CadastroCentroTrabalho from '../views/CadastroCentroTrabalho'
 import CadastroTipoOrdem from '../views/CadastroTipoOrdem'
 import CadastroCausaSintoma from '../views/CadastroCausaSintoma.vue'
+import CadastroComponente from '../views/CadastroComponente'
 
 import validate from '../utils/user-validation';
 import Swal from 'sweetalert2'
@@ -66,6 +67,12 @@ const routes = [
         component: CadastroCausaSintoma,
         meta: { requireAuth: true }
       },
+       {
+        path: 'cadastro-componente',
+        name: 'Componente',
+        component: CadastroComponente,
+        meta: { requireAuth: true }
+      }
     ],
     meta: { requireAuth: true }
   },

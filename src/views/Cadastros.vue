@@ -61,6 +61,11 @@ export default {
         icon: 'fas fa-pencil-alt',
         route: ''
       },
+      {
+        title: 'Componente',
+        icon: 'fas fa-pencil-alt',
+        route: 'cadastros/cadastro-componente'
+      }
     ]
   }),
 };
