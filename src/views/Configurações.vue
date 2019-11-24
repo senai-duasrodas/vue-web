@@ -111,7 +111,7 @@ import accordion from '../components/accordion/accordion';
 import simpleInput from '../components/inputs/simple-input';
 import saveButton from '../components/button/save-button';
 import cancelButton from '../components/button/cancel-button';
-import table from '../components/table/table';
+//import table from '../components/table/table';
 
 export default {
   components: {
@@ -119,7 +119,7 @@ export default {
     'simples-input': simpleInput,
     'save-button': saveButton,
     'cancel-button': cancelButton,
-    'custom-table': table,
+    //'custom-table': table,
   },
 
   data() {
@@ -187,6 +187,7 @@ export default {
           }).then(res => {
             this.users.push(this.userInputValues);
             this.resetModel();
+            console.log(res)
           })
         })
     },
@@ -222,7 +223,7 @@ export default {
                 confirmButtonColor: '#F34336',
               }).then(res => {
                 this.users.splice(index, 1)
-                console.log(this.users);
+                console.log(this.users+res);
               })
             })
         }

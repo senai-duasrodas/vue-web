@@ -4,6 +4,7 @@
       <form @submit.prevent="registerEquipment()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
+            <custom-select v-model="selectValue" :selectOptions="['Causa', 'Sintoma']"></custom-select>
             <simple-input v-model="inputValues.sector" :label="'Equipamento:'" :type="'text'" />
           </div>
           <div class="sideInput">
@@ -22,19 +23,29 @@
 
 <script>
 import simpleInput from "../components/inputs/simple-input";
-import description from "../components/inputs/description";
+import select from '../components/inputs/select'
+//import description from "../components/inputs/description";
 
 export default {
   components: {
     "simple-input": simpleInput,
-    description: description
+    'custom-select': select
+    //description: description
   },
   data() {
     return {
       inputValues: {
         equipment: "",
         component: ""
+      },
+      equipamentos:[
+      {
+        nome: "teste"
+      },
+      {
+        nome:"testando"
       }
+      ]
     };
   },
   methods: {
@@ -60,6 +71,31 @@ export default {
             confirmButtonColor: '#F34336',
           })
         })
+    },
+    getEquipment()
+    {
+      const token = localStorage.getItem('token')
+      fetch(`${this.$apiUrl}/equipamento`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(this.inputValues)
+      }).then(res => res.json())
+        .then(json => {
+          if (json.statusCode === 404) return this.$swal({
+            type: 'error',
+            title: `Ops! ${json.err}`,
+            confirmButtonColor: '#F34336',
+          })
+          this.$swal({
+            type: 'success',
+            title: `${json.response}`,
+            confirmButtonColor: '#F34336',
+          })
+        })
+
     }
   },
 };
@@ -79,8 +115,8 @@ export default {
       width:100%;
     .cadCard {
       padding-top: 2%;
-      height: 16rem;
-      width: 60%;
+      height: 19rem;
+      width: 50%;
       display: flex;
       flex-direction: column;
       border-radius: 10px;

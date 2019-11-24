@@ -17,12 +17,12 @@
 
 <script>
 import simpleInput from "../components/inputs/simple-input";
-import description from "../components/inputs/description";
+//import description from "../components/inputs/description";
 
 export default {
   components: {
     "simple-input": simpleInput,
-    description: description
+    //description: description
   },
   data() {
     return {
