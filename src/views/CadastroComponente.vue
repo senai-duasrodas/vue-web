@@ -4,12 +4,11 @@
       <form @submit.prevent="registerEquipment()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
-            <custom-select v-model="selectValue" :selectOptions="['Causa', 'Sintoma']"></custom-select>
-            <simple-input v-model="inputValues.sector" :label="'Equipamento:'" :type="'text'" />
+            <custom-select v-model="inputValues.equipamento_id" :selectOptions="['Causa', 'Sintoma']"></custom-select>     
           </div>
           <div class="sideInput">
             <div class="inputsSidePosition">
-              <simple-input v-model="inputValues.equipment" :label="'Descricao Componente:'" :type="'text'" />
+              <simple-input v-model="inputValues.description" :label="'Descricao Componente:'" :type="'text'" />
             </div>  
           </div>
         </div>
@@ -35,8 +34,8 @@ export default {
   data() {
     return {
       inputValues: {
-        equipment: "",
-        component: ""
+        description: "",
+        equipamento_id: ""
       },
       equipamentos:[
       {
@@ -51,7 +50,7 @@ export default {
   methods: {
     registerEquipment(){
       const token = localStorage.getItem('token')
-       fetch(`${this.$apiUrl}/equipamento`, {
+       fetch(`${this.$apiUrl}/componente`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
