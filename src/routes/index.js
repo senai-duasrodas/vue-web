@@ -10,6 +10,7 @@ import CadastroCentroTrabalho from '../views/CadastroCentroTrabalho'
 import CadastroTipoOrdem from '../views/CadastroTipoOrdem'
 import CadastroCausaSintoma from '../views/CadastroCausaSintoma.vue'
 import CadastroComponente from '../views/CadastroComponente'
+import CadastroOrdemManutencao from '../views/CadastroOrdemManutencao'
 
 import validate from '../utils/user-validation';
 import Swal from 'sweetalert2'
@@ -72,7 +73,14 @@ const routes = [
         name: 'Componente',
         component: CadastroComponente,
         meta: { requireAuth: true }
+      },
+      {
+        path: 'cadastro-ordem-manutencao',
+        name: 'Ordem de Manutenção',
+        component: CadastroOrdemManutencao,
+        meta: { requireAuth: true }
       }
+
     ],
     meta: { requireAuth: true }
   },

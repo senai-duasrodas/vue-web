@@ -29,7 +29,7 @@ export default {
       {
         title: 'Ordem de Manutenção',
         icon: 'fas fa-pencil-alt',
-        route: ''
+        route: 'cadastros/cadastro-ordem-manutencao'
       },
       {
         title: 'Equipamento',
