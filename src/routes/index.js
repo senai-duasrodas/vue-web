@@ -5,11 +5,13 @@ import Dashboard from '../views/Dashboard'
 import Cadastros from '../views/Cadastros'
 import Login from '../views/Login'
 import Configurações from '../views/Configurações.vue'
-import CadastroEquipamento from '../views/Cadastros/CadastroEquipamento'
-import CadastroLocalInstalacao from '../views/Cadastros/CadastroLocalInstalacao'
-import CadastroCentroTrabalho from '../views/Cadastros/CadastroCentroTrabalho'
-import CadastroTipoOrdem from '../views/Cadastros/CadastroTipoOrdem'
-import CadastroCausaSintoma from '../views/Cadastros/CadastroCausaSintoma.vue'
+import CadastroEquipamento from '../views/CadastroEquipamento'
+import CadastroLocalInstalacao from '../views/CadastroLocalInstalacao'
+import CadastroCentroTrabalho from '../views/CadastroCentroTrabalho'
+import CadastroTipoOrdem from '../views/CadastroTipoOrdem'
+import CadastroCausaSintoma from '../views/CadastroCausaSintoma.vue'
+import CadastroComponente from '../views/CadastroComponente'
+import CadastroOrdemManutencao from '../views/CadastroOrdemManutencao'
 
 import validate from '../utils/token-validation';
 import Swal from 'sweetalert2'
@@ -67,6 +69,19 @@ const routes = [
         component: CadastroCausaSintoma,
         meta: { requireAuth: true }
       },
+       {
+        path: 'cadastro-componente',
+        name: 'Componente',
+        component: CadastroComponente,
+        meta: { requireAuth: true }
+      },
+      {
+        path: 'cadastro-ordem-manutencao',
+        name: 'Ordem de Manutenção',
+        component: CadastroOrdemManutencao,
+        meta: { requireAuth: true }
+      }
+
     ],
     meta: { requireAuth: true }
   },

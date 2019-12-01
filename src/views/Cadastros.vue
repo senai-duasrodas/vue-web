@@ -29,7 +29,7 @@ export default {
       {
         title: 'Ordem de Manutenção',
         icon: 'fas fa-pencil-alt',
-        route: ''
+        route: 'cadastros/cadastro-ordem-manutencao'
       },
       {
         title: 'Equipamento',
@@ -61,6 +61,11 @@ export default {
         icon: 'fas fa-pencil-alt',
         route: ''
       },
+      {
+        title: 'Componente',
+        icon: 'fas fa-pencil-alt',
+        route: 'cadastros/cadastro-componente'
+      }
     ]
   }),
 };

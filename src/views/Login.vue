@@ -39,8 +39,8 @@ export default {
   data() {
     return {
       inputValues: {
-        numeroCracha: '12035',
-        senha: '123'
+        numeroCracha: '',
+        senha: ''
       }
     };
   },

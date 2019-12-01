@@ -1,7 +1,7 @@
 <template>
   <div class="equipmentBackground">
     <div class="wrapper">
-      <form @submit.prevent="registerEquipment()" class="formPosition">
+      <form @submit.prevent="registerOrderType()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
             <simple-input v-model="inputValues.orderType" :label="'Tipo de Ordem:'" :type="'text'" />
@@ -17,12 +17,10 @@
 
 <script>
 import simpleInput from "../../components/inputs/simple-input";
-import description from "../../components/inputs/description";
 
 export default {
   components: {
     "simple-input": simpleInput,
-    description: description
   },
   data() {
     return {
@@ -32,7 +30,7 @@ export default {
     };
   },
   methods: {
-    registerEquipment(){
+    registerOrderType(){
       const token = localStorage.getItem('token')
        fetch(`${this.$apiUrl}/tipo-ordem`, {
         method: 'post',

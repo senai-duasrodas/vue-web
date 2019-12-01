@@ -1,10 +1,15 @@
 <template>
   <div class="equipmentBackground">
     <div class="wrapper">
-      <form @submit.prevent="registerSector()" class="formPosition">
+      <form @submit.prevent="registerEquipment()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
-            <simple-input v-model="inputValues.sector" :label="'Local Instalação:'" :type="'text'" />
+            <custom-select v-model="inputValues.equipamento_id" :selectOptions="['Causa', 'Sintoma']"></custom-select>     
+          </div>
+          <div class="sideInput">
+            <div class="inputsSidePosition">
+              <simple-input v-model="inputValues.description" :label="'Descricao Componente:'" :type="'text'" />
+            </div>  
           </div>
         </div>
         <div class="d-flex justify-content-center m-3">
@@ -16,23 +21,36 @@
 </template>
 
 <script>
-import simpleInput from "../../components/inputs/simple-input";
+import simpleInput from "../components/inputs/simple-input";
+import select from '../components/inputs/select'
+//import description from "../components/inputs/description";
 
 export default {
   components: {
     "simple-input": simpleInput,
+    'custom-select': select
+    //description: description
   },
   data() {
     return {
       inputValues: {
-        sector: ""
+        description: "",
+        equipamento_id: ""
+      },
+      equipamentos:[
+      {
+        nome: "teste"
+      },
+      {
+        nome:"testando"
       }
+      ]
     };
   },
   methods: {
-    registerSector(){
+    registerEquipment(){
       const token = localStorage.getItem('token')
-       fetch(`${this.$apiUrl}/local-instalacao`, {
+       fetch(`${this.$apiUrl}/componente`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -52,6 +70,31 @@ export default {
             confirmButtonColor: '#F34336',
           })
         })
+    },
+    getEquipment()
+    {
+      const token = localStorage.getItem('token')
+      fetch(`${this.$apiUrl}/equipamento`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(this.inputValues)
+      }).then(res => res.json())
+        .then(json => {
+          if (json.statusCode === 404) return this.$swal({
+            type: 'error',
+            title: `Ops! ${json.err}`,
+            confirmButtonColor: '#F34336',
+          })
+          this.$swal({
+            type: 'success',
+            title: `${json.response}`,
+            confirmButtonColor: '#F34336',
+          })
+        })
+
     }
   },
 };
@@ -71,8 +114,8 @@ export default {
       width:100%;
     .cadCard {
       padding-top: 2%;
-      height: 11rem;
-      width: 60%;
+      height: 19rem;
+      width: 50%;
       display: flex;
       flex-direction: column;
       border-radius: 10px;
