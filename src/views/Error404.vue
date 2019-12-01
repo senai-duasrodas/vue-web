@@ -1,15 +1,32 @@
 <template>
   <div class="root-error-view">
     <div class="erro-wrapper">
-
+      <div class="p-4 d-flex justify-content-between">
+        <div class="d-flex align-items-center m-5">
+          <i class="fas fa-exclamation-triangle" />
+        </div>
+        <div class="m-5">
+          <h1>Error 404<h2>Página não encontrada!</h2></h1>
+        </div>
+      </div>
+      <div class="options">
+        <div class="button">
+          <router-link to="/">
+            <save-button label="Voltar para página inicial" :active="true"/>
+          </router-link>
+        </div>
+      </div>
     </div>
-
   </div>
 </template>
 
 <script>
-export default {
+import saveButton from '../components/button/save-button'
 
+export default {
+  components: {
+    'save-button': saveButton
+  }
 }
 </script>
 
@@ -17,10 +34,15 @@ export default {
 .root-error-view {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray);
   .erro-wrapper {
-    width: 50%;
-    padding: 20px;
-    background-color: red;
+    i {
+      font-size: 5rem;
+    }
   }
+  a {  text-decoration: none;}
 }
 </style>

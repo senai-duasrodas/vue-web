@@ -29,15 +29,17 @@ new Vue({
     Vue.prototype.$http = new Http();
 
     try {
-      if (router.currentRoute.name === 'login') return;
+      if (router.currentRoute.name === 'login' || router.currentRoute.name === '404') return;
 
       await validate(router.options.apiUrl);
     } catch (err) {
+      console.log(err);
       localStorage.removeItem('token');
-      
+      if (err.err.name === 'TokenExpiredError') return router.replace('/');
+
       Swal.fire({
         type: 'warning',
-        title: 'Erro ao autentizar! Por favor, entre novamente!',
+        title: `Erro ao autentizar! Por favor, tente novamente.`,
       })
       router.replace('/');
     }

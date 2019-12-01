@@ -42,9 +42,9 @@
 </template>
 
 <script>
-import simpleInput from '../components/inputs/simple-input';
-import select from '../components/inputs/select'
-import saveButton from '../components/button/save-button'
+import simpleInput from '../../components/inputs/simple-input';
+import select from '../../components/inputs/custom-select'
+import saveButton from '../../components/button/save-button'
 
 export default {
   components: {
@@ -77,7 +77,7 @@ export default {
         .then(json => {
           if (json.statusCode === 404) return this.$swal({
             type: 'error',
-            title: `Ops! ${json.err}`,
+            title: `Ops! ${json.result}`,
             confirmButtonColor: '#F34336',
           })
           this.$swal({

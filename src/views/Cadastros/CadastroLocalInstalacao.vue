@@ -4,7 +4,7 @@
       <form @submit.prevent="registerEquipment()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
-            <simple-input v-model="inputValues.orderType" :label="'Tipo de Ordem:'" :type="'text'" />
+            <simple-input v-model="inputValues.sector" :label="'Local Instalação:'" :type="'text'" />
           </div>
         </div>
         <div class="d-flex justify-content-center m-3">
@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import simpleInput from "../components/inputs/simple-input";
-import description from "../components/inputs/description";
+import simpleInput from "../../components/inputs/simple-input";
+import description from "../../components/inputs/description";
 
 export default {
   components: {
@@ -27,14 +27,14 @@ export default {
   data() {
     return {
       inputValues: {
-        orderType: ""
+        sector: ""
       }
     };
   },
   methods: {
     registerEquipment(){
       const token = localStorage.getItem('token')
-       fetch(`${this.$apiUrl}/tipo-ordem`, {
+       fetch(`${this.$apiUrl}/local-instalacao`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',

@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import simpleInput from "../components/inputs/simple-input";
-import description from "../components/inputs/description";
+import simpleInput from "../../components/inputs/simple-input";
+import description from "../../components/inputs/description";
 
 export default {
   components: {

@@ -4,28 +4,7 @@
       <form @submit.prevent="registerEquipment()" class="formPosition">
         <div class="cadCard">
           <div class="inputs">
-            <simple-input v-model="inputValues.sector" :label="'Local Instalação:'" :type="'text'" />
-          </div>
-          <div class="sideInput">
-            <div class="inputsSidePosition">
-              <simple-input v-model="inputValues.equipment" :label="'Equipamento:'" :type="'text'" />
-            </div>
-            <div class="inputsSidePosition">
-              <simple-input
-                v-model="inputValues.superiorEquipment"
-                :label="'Equipamento Superior:'"
-                :type="'text'"
-              />
-            </div>
-          </div>
-          <div class="textAreaDescription">
-            <!--<div><textarea name="descricao" id="descricacaoEquipamento" cols="59" rows="3"></textarea></div>-->
-            <description
-              v-model="inputValues.description"
-              :cols="1"
-              :rows="3"
-              :label="'Descrição:'"
-            />
+            <simple-input v-model="inputValues.orderType" :label="'Tipo de Ordem:'" :type="'text'" />
           </div>
         </div>
         <div class="d-flex justify-content-center m-3">
@@ -37,8 +16,8 @@
 </template>
 
 <script>
-import simpleInput from "../components/inputs/simple-input";
-import description from "../components/inputs/description";
+import simpleInput from "../../components/inputs/simple-input";
+import description from "../../components/inputs/description";
 
 export default {
   components: {
@@ -48,17 +27,14 @@ export default {
   data() {
     return {
       inputValues: {
-        sector: "",
-        equipment: "",
-        superiorEquipment: "",
-        description: ""
+        orderType: ""
       }
     };
   },
   methods: {
     registerEquipment(){
       const token = localStorage.getItem('token')
-       fetch(`${this.$apiUrl}/equipamento`, {
+       fetch(`${this.$apiUrl}/tipo-ordem`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +73,7 @@ export default {
       width:100%;
     .cadCard {
       padding-top: 2%;
-      height: 23rem;
+      height: 11rem;
       width: 60%;
       display: flex;
       flex-direction: column;

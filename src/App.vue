@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="routes !== 'login'" class="content">
+    <div v-if="routes" class="content">
       <div class="sidebar-content shadow">
         <sidebar />
       </div>
@@ -42,7 +42,9 @@ export default {
 
   computed: {
     routes() {
-      return this.$route.name
+      if (this.$route.name === 'login') return false
+      if (this.$route.name === '404') return false
+      return true;
     }
   }
 }
@@ -54,6 +56,7 @@ export default {
   --duas-rodas: #F34336;
   --duas-rodas-soft: #E66E6D;
   --shadow-gray: rgb(160, 160, 160);
+  --gray: rgb(92, 92, 92);
 }
 
 body {
