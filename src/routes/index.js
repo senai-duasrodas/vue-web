@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Error404 from '../views/Error404.vue'
 import Dashboard from '../views/Dashboard'
 import Cadastros from '../views/Cadastros'
 import Login from '../views/Login'
@@ -12,7 +13,7 @@ import CadastroCausaSintoma from '../views/CadastroCausaSintoma.vue'
 import CadastroComponente from '../views/CadastroComponente'
 import CadastroOrdemManutencao from '../views/CadastroOrdemManutencao'
 
-import validate from '../utils/user-validation';
+import validate from '../utils/token-validation';
 import Swal from 'sweetalert2'
 
 Vue.use(VueRouter)
@@ -108,6 +109,11 @@ const routes = [
     component: Configurações,
     meta: { requireAuth: true }
   },
+  {
+    path: '*',
+    name: '404',
+    component: Error404
+  }
 ]
 
 const apiUrl = 'http://localhost:3000';

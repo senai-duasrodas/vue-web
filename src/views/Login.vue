@@ -18,7 +18,7 @@
             </div>
           </div>
           <div class="d-flex justify-content-center m-3">
-            <b-button type="submit" value="send" variant="danger">Acessar</b-button>
+            <login-button label="Acessar" />
           </div>
         </form>
       </div>
@@ -28,10 +28,12 @@
 
 <script>
 import advancedInput from '../components/inputs/advanced-input'
+import saveButton from '../components/button/save-button'
 
 export default {
   components: {
     'advanced-input': advancedInput,
+    'login-button': saveButton,
   },
 
   data() {
@@ -45,26 +47,18 @@ export default {
 
   methods: {
     loginValidation() {
-      // if (!this.inputValues.cracha && )
-      console.log("valores:" + JSON.stringify(this.inputValues))
-      fetch(`${this.$apiUrl}/users`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.inputValues)
-      }).then(res => res.json())
+      this.$http.methodPost('users', localStorage.getItem('token'), this.inputValues)
         .then(async json => {
-          if (json.statusCode === 404) return this.$swal({
+          if (json.status !== 200) return this.$swal({
             type: 'error',
-            title: `${json.err.result}`,
+            title: `${json.err}`,
           })
           try {
-            await this.setTokenLocalStorage(json);
-            
+            await this.setTokenLocalStorage(json.token);
             this.$swal({
               position: 'top',
               type: 'success',
+              toast: 'true',
               title: 'Autenticado com sucesso!',
               showConfirmButton: false,
               timer: 1500
@@ -73,28 +67,31 @@ export default {
             });
           } catch (err) {
             this.$swal({
+              position: 'top',
               type: 'error',
-              title: `Ocorreu um erro! ${err}`,
+              toast: 'true',
+              title: `Ocorreu um erro!`,
             })
           }
-        })
-        .catch(() => {
+        }).catch(err => {
+          console.log(err);
           this.$swal({
             type: 'error',
             title: `Algo deu errado! Falha na requisição!`,
           })
-        })
+      })
     },
 
-    setTokenLocalStorage(token) {      
+    setTokenLocalStorage(token) {    
+      console.log(token);  
       return new Promise((resolve, reject) => {
-        if (this.$_.isEmpty(token)) reject('Não há nenhum token de autenticação!');
-        localStorage.setItem('token', token.token)
+        if (this.$_.isEmpty(token)) reject();
+        localStorage.setItem('token', token)
         resolve();
       })
     },
 
-    testingDevelopmentRoutes(){
+    testingDevelopmentRoutes() {
       this.$router.push('dashboard')
     }
 

@@ -20,10 +20,10 @@
 <script>
 export default {
   props: {
-    label: { type: String, default: () => '' },
-    type: { type: String, default: () => '' },
-    placeholder: { type: String, default: () => '' },
-    value: { type: String, default: '' },
+    label: { type: String, default: '' },
+    type: { type: String, default: '' },
+    placeholder: { type: String, default: '' },
+    value: { type: undefined, default: '' },
   },
 
   data() {

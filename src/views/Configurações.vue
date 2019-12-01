@@ -30,7 +30,7 @@
                         <td>{{ user.nivelAcesso }}</td>
                         <td style="width: 50px">
                           <div class="d-flex table-action">
-                            <i class="fas fa-edit text-muted" @click="isEditing = !isEditing"></i>
+                            <i class="fas fa-edit text-muted" @click="editUser(user)"></i>
                             <i class="fas fa-trash text-muted" @click="deleteUser(user, index)"></i>
                           </div> 
                         </td>
@@ -40,9 +40,7 @@
                 </div>
               </div>
             </template>
-          </transition>
 
-          <transition name="slide-fade" mode="out-in">
             <template v-if="isEditing">
               <form @submit.prevent="updateUser">
                 <div class="accordion-content bg-white mt-3 p-3 d-flex flex-wrap">
@@ -50,7 +48,10 @@
                     <simples-input v-model="userInputValues.nome" label="Nome" type="text"></simples-input>
                   </div>
                   <div class="p-2 m-2 w-25">
-                    <simples-input v-model="userInputValues.cracha" label="Cracha" type="number"></simples-input>
+                    <simples-input v-model="userInputValues.numeroCracha" label="Cracha" type="number"></simples-input>
+                  </div>
+                  <div class="p-2 m-2 w-25">
+                    <simples-input v-model="userInputValues.funcao" label="Função" type="text"></simples-input>
                   </div>
                   <div class="p-2 m-2 w-25">
                     <simples-input v-model="userInputValues.nivelAcesso" label="Nível de acesso" type="number"></simples-input>
@@ -63,8 +64,8 @@
                   </div>
                 </div>
                 <div class="save d-flex justify-content-center">
-                  <save-button label="Alterar" />
-                  <cancel-button label="Cancelar" @click.native="isEditing = !isEditing" />
+                  <save-button label="Alterar" @click="updateUser"/>
+                  <cancel-button label="Cancelar" @click.native="closeEditingUser" />
                 </div>
               </form>
             </template>
@@ -107,6 +108,7 @@
 </template>
 
 <script>
+import { getLocalStorageToken } from '../utils/utils';
 import accordion from '../components/accordion/accordion';
 import simpleInput from '../components/inputs/simple-input';
 import saveButton from '../components/button/save-button';
@@ -139,50 +141,38 @@ export default {
   },
 
   mounted() {
-    this.token = localStorage.getItem('token')
     this.getUsers()
-    console.log(this.users);
   },
 
   methods: {
     getUsers() {
       console.log('hereee');
-      fetch(`${this.$apiUrl}/users/get`, {
-        method: 'get',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': `Bearer ${this.token}`
-        },
-      }).then(res => res.json())
-        .then(json => {
-          if (json.query.length === 0) this.$swal({
-            type: 'warning',
-            title: 'Não foi encontrado nenhum usuário cadastro!',
-            confirmButtonColor: '#F34336',
-          })
-          json.query.forEach(i => this.users.push(i))
+      this.$http.methodGet('users/get', getLocalStorageToken()).then(res => {
+        if (res.result.length === 0) this.$swal({
+          type: 'warning',
+          title: 'Não foi encontrado nenhum usuário cadastrado!',
+          confirmButtonColor: '#F34336',
         })
+        console.log(res.result.length);
+        if (res.result.length === undefined) 
+          this.users.push(res.result)
+        else this.users = [ ...res.result ]
+        console.log(this.users);
+      })
+      
     },
 
     register() {
-      fetch(`${this.$apiUrl}/users/register`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': `Bearer ${this.token}`
-        },
-        body: JSON.stringify(this.userInputValues)
-      }).then(res => res.json())
+      this.$http.methodPost('users/register', getLocalStorageToken(), this.userInputValues)
         .then(async json => {
-          console.log(json);
-          if (json.statusCode === 404) return this.$swal({
+          if (json.status !== 200) return this.$swal({
             type: 'error',
             title: `Ops! ${json.err}`,
             confirmButtonColor: '#F34336',
           })
           this.$swal({
             type: 'success',
-            title: `${json.msg}`,
+            title: `${json.result}`,
             confirmButtonColor: '#F34336',
           }).then(res => {
             this.users.push(this.userInputValues);
@@ -192,8 +182,30 @@ export default {
         })
     },
 
-    updateUser() {
+    editUser(user) {
+      console.log(user);
+      this.userInputValues = { ...user }
+      console.log(this.userInputValues);
+      this.isEditing = true;
+    },
 
+    updateUser() {
+      this.$http.methodUpdate('users', getLocalStorageToken(), this.userInputValues, this.userInputValues.numeroCracha)
+        .then(res => {
+          if (res.status !== 200) return this.$swal({
+            type: 'error',
+            title: res.err,
+            confirmButtonColor: '#F34336',
+          })
+          this.$swal({
+            type: 'success',
+            title: res.result
+          }).then(() => {
+            const index = this.users.indexOf(this.users.find(i => i.numeroCracha === this.userInputValues.numeroCracha))
+            this.users.splice(index, 1, this.userInputValues)
+            this.closeEditingUser()
+          })
+        })
     },
 
     deleteUser(user, index) {
@@ -204,22 +216,16 @@ export default {
         showCancelButton: true,
         confirmButtonColor: '#F34336',
         preConfirm: () => {
-          fetch(`${this.$apiUrl}/users/${user.numeroCracha}`, {
-            method: 'delete',
-            headers: {
-              'Content-Type': 'application/json',
-              'authorization': `Bearer ${this.token}`
-            }
-          }).then(res => res.json())
+          this.$http.methodDelete('users', getLocalStorageToken(), user.numeroCracha)
             .then(json => {
-              if (json.statusCode === 404) return this.$swal({
+              if (json.status !== 200) return this.$swal({
                 type: 'warning',
                 title: json.err,
                 confirmButtonColor: '#F34336',
               })
               this.$swal({
                 type: 'success',
-                title: json.msg,
+                title: json.result,
                 confirmButtonColor: '#F34336',
               }).then(res => {
                 this.users.splice(index, 1)
@@ -228,6 +234,11 @@ export default {
             })
         }
       })
+    },
+
+    closeEditingUser() {
+      this.isEditing = false;
+      this.resetModel();
     },
 
     resetModel() {

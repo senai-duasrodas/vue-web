@@ -19,10 +19,10 @@
 <script>
 export default {
   props: {
-    label: { type: String, default: () => '' },
-    cols: { type: String, default: () => '' },
-    rows: { type: String, default: () => '' },
-    value: { type: String, default: '' }
+    label: { type: String, default: '' },
+    cols: { type: String, default: '' },
+    rows: { type: String, default: '' },
+    value: { type: undefined, default: '' }
   },
 
   data() {

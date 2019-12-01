@@ -3,7 +3,7 @@
     <div class="input-container mt-3">
       <b-form-select v-model="model" required>
         <template v-for="(option, index) in selectOptions">
-          <option :value="option" :key="`option-${index}`">{{option}}</option>
+          <option :value="option.value" :key="`option-${index}`">{{option.label}}</option>
         </template>
       </b-form-select>
     </div>
@@ -16,7 +16,7 @@ export default {
     label: { type: String, default: '' },
     selectOptions: { type: Array, default: () => [] },
     placeholder: { type: String, default: '' },
-    value: { type: String, default: '' }
+    value: { type: undefined, default: '' }
   },
 
   data() {
