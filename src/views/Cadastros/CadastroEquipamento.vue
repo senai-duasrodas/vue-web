@@ -198,6 +198,7 @@ export default {
     },
 
     updateEquipment() {
+      console.log(this.inputValues.idEquipamento);
       this.$http.methodUpdate('equipamento', getLocalStorageToken(), this.inputValues, this.inputValues.idEquipamento)
         .then(res => {
           if (res.status !== 200) return this.$swal({

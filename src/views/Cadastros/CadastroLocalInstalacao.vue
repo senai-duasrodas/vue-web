@@ -138,6 +138,7 @@ export default {
     },
 
     updateSector(sector) {
+      console.log(this.inputValues.idSetor);
       this.$http.methodUpdate('local-instalacao', getLocalStorageToken(), this.inputValues, this.inputValues.idSetor)
         .then(res => {
           if (res.status !== 200) return this.$swal({

@@ -59,6 +59,7 @@ export default {
   methods: {
     openOrder(order) {
       console.log('order', order);
+      localStorage.setItem('ordem', JSON.stringify(order))
       this.$router.push({ path: 'consultas/detalhamento'})
     },
 

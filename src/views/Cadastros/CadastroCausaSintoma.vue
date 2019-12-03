@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { getLocalStorageToken } from '../../utils/utils'
 import simpleInput from '../../components/inputs/simple-input';
 import select from '../../components/inputs/custom-select'
 import saveButton from '../../components/button/save-button'
@@ -57,54 +58,39 @@ export default {
     selectValue: '',
     cause: '',
     symptom: '',
-    token: ''
   }),
 
-  mounted() {
-    this.token = localStorage.getItem('token');
-  },
 
   methods: {
     registerCause() {
-      fetch(`${this.$apiUrl}/causa-sintoma/causa`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': `Bearer ${this.token}`
-        },
-        body: JSON.stringify({cause: this.cause})
-      }).then(res => res.json())
-        .then(json => {
-          if (json.statusCode === 404) return this.$swal({
+      console.log(this.cause);
+      this.$http.methodPost('causa-sintoma/causa', getLocalStorageToken(), {causa: this.cause})
+        .then(res => {
+          if (res.status !== 200) return this.$swal({
             type: 'error',
-            title: `Ops! ${json.result}`,
+            title: `Ops! ${res.err}`,
             confirmButtonColor: '#F34336',
           })
           this.$swal({
             type: 'success',
-            title: json.response
+            title: res.result,
+            confirmButtonColor: '#F34336',
           })
         })
     },
 
     registerSymptom() {
-      fetch(`${this.$apiUrl}/causa-sintoma/sintoma`, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': `Bearer ${this.token}`
-        },
-        body: JSON.stringify({symptom: this.symptom})
-      }).then(res => res.json())
-        .then(json => {
-          if (json.statusCode === 404) return this.$swal({
+      this.$http.methodPost('causa-sintoma/sintoma', getLocalStorageToken(), {sintoma: this.symptom })
+        .then(res => {
+          if (res.status !== 200) return this.$swal({
             type: 'error',
-            title: `Ops! ${json.err}`,
+            title: `Ops! ${res.err}`,
             confirmButtonColor: '#F34336',
           })
           this.$swal({
             type: 'success',
-            title: json.response
+            title: res.result,
+            confirmButtonColor: '#F34336',
           })
         })
     },
