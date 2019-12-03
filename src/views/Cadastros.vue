@@ -28,42 +28,42 @@ export default {
     cards: [
       {
         title: 'Ordem de Manutenção',
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-file-signature',
         route: 'cadastros/cadastro-ordem-manutencao'
       },
       {
         title: 'Equipamento',
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-tools',
         route: 'cadastros/cadastro-equipamento'
       },
       {
         title: 'Local de instalção',
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-map-marker-alt',
         route: 'cadastros/cadastro-local-instalacao'
       },
       {
         title: 'Centro de Trabalho',
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-map-pin',
         route: 'cadastros/cadastro-centro-trabalho'
       },
       {
         title: 'Tipo de Ordem',
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-file',
         route: 'cadastros/cadastro-tipo-ordem'
       },
       {
         title: 'Causa e sintoma',
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-exclamation-triangle',
         route: 'cadastros/cadastro-causa-sintoma'
       },
       {
         title: 'EPI',
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-hard-hat',
         route: ''
       },
       {
         title: 'Componente',
-        icon: 'fas fa-pencil-alt',
+        icon: 'fas fa-puzzle-piece',
         route: 'cadastros/cadastro-componente'
       }
     ]
