@@ -71,7 +71,7 @@
             </div>
             <div class="d-flex justify-content-center m-3">
               <save-button :label="getSaveButtonText()" />
-              <cancel-button v-if="isEditing" @click.native="closeEditingEquipment" label="Cancelar" />
+              <cancel-button v-if="isEditing" @click.native="closeEditing" label="Cancelar" />
             </div>
           </form>
         </template>
@@ -125,7 +125,7 @@ export default {
       this.isEditing = true;
     },
 
-    closeEditingEquipment() {
+    closeEditing() {
       this.switchListRegister = 'list'
       this.isEditing = false;
       this.resetModel();
@@ -213,7 +213,7 @@ export default {
           }).then(() => {
             const index = this.equipments.indexOf(this.equipments.find(i => i.idEquipamento === this.inputValues.idEquipamento))
             this.equipments.splice(index, 1, this.inputValues)
-            this.closeEditingEquipment()
+            this.closeEditing()
           })
         })
     },

@@ -5,6 +5,9 @@ import Dashboard from '../views/Dashboard'
 import Cadastros from '../views/Cadastros'
 import Login from '../views/Login'
 import Configurações from '../views/Configurações.vue'
+import Detalhamento from '../views/Detalhamento.vue'
+import Consulta from '../views/Consulta.vue'
+
 import CadastroEquipamento from '../views/Cadastros/CadastroEquipamento'
 import CadastroLocalInstalacao from '../views/Cadastros/CadastroLocalInstalacao'
 import CadastroCentroTrabalho from '../views/Cadastros/CadastroCentroTrabalho'
@@ -94,7 +97,16 @@ const routes = [
   {
     path: '/consultas',
     name: 'Consultas',
-    component: Dashboard,
+    component: Consulta,
+    children: [
+      {
+        path: 'detalhamento',
+        name: 'Detalhamento',
+        component: Detalhamento,
+        // props: true,
+        meta: { requireAuth: true }
+      }
+    ],
     meta: { requireAuth: true }
   },
   {
@@ -127,6 +139,7 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
   if (to.meta.requireAuth) {
+    console.log('to', to);
     try {
       const response = await validate(apiUrl)
       console.log('sucess: ', response);

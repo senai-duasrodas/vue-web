@@ -51,7 +51,7 @@
           </div>
           <div class="d-flex justify-content-center m-3">
             <save-button :label="getSaveButtonText()" />
-            <cancel-button v-if="isEditing" @click.native="closeEditingEquipment" label="Cancelar" />
+            <cancel-button v-if="isEditing" @click.native="closeEditing" label="Cancelar" />
           </div>
         </form>
       </template>
@@ -117,7 +117,7 @@ export default {
     },
 
     registerSector() {
-      if (this.isEditing) return this.updateEquipment();
+      if (this.isEditing) return this.updateSector();
       this.$http.methodPost('local-instalacao', getLocalStorageToken(), this.inputValues)
         .then(res => {
           if (res.status !== 200) return this.$swal({
@@ -138,7 +138,7 @@ export default {
     },
 
     updateSector(sector) {
-      this.$http.methodUpdate('local-instalacao', getLocalStorageToken(), sector.idSetor)
+      this.$http.methodUpdate('local-instalacao', getLocalStorageToken(), this.inputValues, this.inputValues.idSetor)
         .then(res => {
           if (res.status !== 200) return this.$swal({
             type: 'error',
@@ -152,7 +152,7 @@ export default {
           }).then(() => {
             const index = this.instalationLocal.indexOf(this.instalationLocal.find(i => i.idSetor === this.inputValues.idSetor))
             this.instalationLocal.splice(index, 1, this.inputValues)
-            this.closeEditingEquipment()
+            this.closeEditing()
           })
         })
     },
@@ -184,7 +184,7 @@ export default {
       });
     },
 
-    closeEditingEquipment() {
+    closeEditing() {
       this.switchListRegister = 'list'
       this.isEditing = false;
       this.resetModel();

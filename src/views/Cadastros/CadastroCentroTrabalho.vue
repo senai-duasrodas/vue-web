@@ -21,17 +21,17 @@
               <table class="table table table-striped table-borderless table-hover" cellspacing="0">
                 <thead class="table-head">
                   <tr>
-                    <th scope="col">Setor</th>
+                    <th scope="col">Centro de trabalho</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody class="table-body">
                   <tr v-for="(workCenter, index) in workCenters" :key="`workCenter-${index}`">
-                    <td>teste</td>
+                    <td>{{ workCenter.descricao_centro_trabalho}}</td>
                     <td style="width: 50px">
                       <div class="d-flex table-action">
-                        <i class="fas fa-edit text-muted" @click="editWorkCenter(sector)"></i>
-                        <i class="fas fa-trash text-muted" @click="deleteWorkCenter(sector, index)"></i>
+                        <i class="fas fa-edit text-muted" @click="editWorkCenter(workCenter)"></i>
+                        <i class="fas fa-trash text-muted" @click="deleteWorkCenter(workCenter, index)"></i>
                       </div>
                     </td>
                   </tr>
@@ -46,11 +46,12 @@
         <form @submit.prevent="registerWorkCenter()" class="formPosition">
           <div class="cadCard">
             <div class="inputs">
-              <simple-input v-model="inputValues.workCenter" :label="'Centro de Trabalho:'" :type="'text'" />
+              <simple-input v-model="inputValues.descricao_centro_trabalho" :label="'Centro de Trabalho:'" :type="'text'" />
             </div>
           </div>
           <div class="d-flex justify-content-center m-3">
-            <b-button type="submit" value="send" variant="danger">Cadastrar</b-button>
+            <save-button :label="getSaveButtonText()" />
+            <cancel-button v-if="isEditing" @click.native="closeEditing" label="Cancelar" />
           </div>
         </form>
       </template>
@@ -60,28 +61,37 @@
 
 <script>
 import { getLocalStorageToken } from '../../utils/utils'
-import simpleInput from "../../components/inputs/simple-input";
+import simpleInput from '../../components/inputs/simple-input';
+import saveButton from '../../components/button/save-button';
+import cancelButton from '../../components/button/cancel-button';
 
 export default {
   components: {
     "simple-input": simpleInput,
+    "save-button": saveButton,
+    "cancel-button": cancelButton,
   },
   data() {
     return {
       inputValues: {
-        workCenter: ""
+        descricao_centro_trabalho: '',
       },
       switchListRegister: 'list',
       isEditing: false,
-      workCenters: ['sector'],
+      workCenters: [],
     };
   },
 
   mounted() {
-    // this.getWorkCenter();
+    this.getWorkCenter();
   },
 
   methods: {
+    getSaveButtonText() {
+      if (this.isEditing) return 'Alterar';
+      else return 'Cadastrar'
+    },
+
     getWorkCenter() {
       this.$http.methodGet('centro-trabalho/get', getLocalStorageToken())
         .then(res => {
@@ -90,14 +100,16 @@ export default {
             title: 'Não foi encontrado nenhum centro de trabalho!',
             confirmButtonColor: '#F34336',
           })
+          console.log('centro work', res);
           if (res.result.length === undefined) 
-          this.workCenter.push(res.result)
-          else this.workCenter = [ ...res.result ]
-          console.log('im the centro de trabalho', this.workCenter);
+          this.workCenters.push(res.result)
+          else this.workCenters = [ ...res.result ]
+          console.log('im the centro de trabalho', this.workCenters);
         })
     },
 
-    registerWorkCenter(){
+    registerWorkCenter() {
+      if (this.isEditing) return this.updateWorkCenter();
       this.$http.methodPost('centro-trabalho', getLocalStorageToken(), this.inputValues)
         .then(res => {
           if (res.status !== 200) return this.$swal({
@@ -109,18 +121,22 @@ export default {
             type: 'success',
             title: `${res.result}`,
             confirmButtonColor: '#F34336',
+          }).then(() => {
+            this.workCenters.push(this.inputValues);
+            console.log(this.instalationLocal);
+            this.resetModel();
           })
         })
     },
 
-    deleteWorkCenter (workCenter, index) {
+    deleteWorkCenter(workCenter, index) {
       this.$swal({
         type: 'question',
-        title: `Deseja mesmo remover o setor de ?`,
+        title: `Deseja mesmo remover o centro de trabalho ${workCenter.descricao_centro_trabalho}?`,
         showCancelButton: true,
         confirmButtonColor: '#F34336',
         preConfirm: () => {
-          this.$http.methodDelete('centro-trabalho', getLocalStorageToken(), )
+          this.$http.methodDelete('centro-trabalho', getLocalStorageToken(), workCenter.idCentro_Trabalho)
             .then(res => {
               if (res.status !== 200) return this.$swal({
                 type: 'error',
@@ -133,15 +149,23 @@ export default {
                 title: `${res.result}`,
                 confirmButtonColor: '#F34336',
               }).then(() => {
-                this.workCenter.splice(index, 1)
+                this.workCenters.splice(index, 1)
               })
             })
         }
       });
     },
 
-    updateSector(sector) {
-      this.$http.methodUpdate('centro-trabalho', getLocalStorageToken(), )
+    editWorkCenter(workCenter) {
+      console.log(workCenter);
+      this.inputValues = { ...workCenter }
+      console.log(this.inputValues);
+      this.switchListRegister = 'register'
+      this.isEditing = true;
+    },
+
+    updateWorkCenter(sector) {
+      this.$http.methodUpdate('centro-trabalho', getLocalStorageToken(), this.inputValues, this.inputValues.idCentro_Trabalho )
         .then(res => {
           if (res.status !== 200) return this.$swal({
             type: 'error',
@@ -153,11 +177,21 @@ export default {
             title: `${res.result}`,
             confirmButtonColor: '#F34336',
           }).then(() => {
-            const index = this.instalationLocal.indexOf(this.instalationLocal.find(i => i.idSetor === this.inputValues.idSetor))
-            this.instalationLocal.splice(index, 1, this.inputValues)
-            this.closeEditingEquipment()
+            const index = this.workCenters.indexOf(this.workCenters.find(i => i.idCentro_Trabalho === this.inputValues.idCentro_Trabalho))
+            this.workCenters.splice(index, 1, this.inputValues)
+            this.closeEditing()
           })
         })
+    },
+
+    closeEditing() {
+      this.switchListRegister = 'list'
+      this.isEditing = false;
+      this.resetModel();
+    },
+
+    resetModel() {
+      this.inputValues = {}
     },
   },
 };
