@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import simpleInput from "../components/inputs/simple-input";
-import select from '../components/inputs/select'
+import simpleInput from "../../components/inputs/simple-input";
+import select from '../../components/inputs/custom-select'
 //import description from "../components/inputs/description";
 
 export default {
