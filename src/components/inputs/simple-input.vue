@@ -11,7 +11,7 @@
         :type="type"
         pattern=".+"
         :placeholder="placeholder"
-        required
+        
       />
     </div>
   </div>

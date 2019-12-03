@@ -20,7 +20,7 @@ export default {
     placeholder: { type: String, default: '' },
     value: { type: Number, default: 0 },
     model: { type: Number, default: 0},
-    selects:  { type: Array, default: () => [] }
+    selects:  { type: Object, default: () => {} }
   },
 
   data() {

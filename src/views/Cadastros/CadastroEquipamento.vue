@@ -260,8 +260,8 @@ export default {
       border-radius: 10px;
       background-color: #f8f9fa !important;
     }
+
   }
-  
   .table-content {
     border-radius: 10px;
     table {
