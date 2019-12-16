@@ -21,10 +21,17 @@
             <div>
               <tranfer-select v-model="inputValues.stats" :selects="selectsStats" :label="'Status'"/>
             </div>
+            <div>
+              <custom-select v-model="inputValues.customSelect" :selects="getStatsSelect()" :label="'TESTE'"/>
+            </div>
+            <div>
+              <custom-select v-model="inputValues.customSelect2" :selects="getPrioritySelect" :label="'TESTE'"/>
+            </div>
+            <!-- {{stats}} -->
           </div>
         <div class="qualquer"></div>
         <div class="d-flex justify-content-center m-3">
-          <b-button type="submit" value="send" variant="danger">Cadastrar</b-button>
+          <save-button label="Cadastrar" />
         </div>
       </form>
   </div>
@@ -35,11 +42,16 @@ import { getLocalStorageToken } from '../../utils/utils';
 import simpleInput from "../../components/inputs/simple-input";
 import description from "../../components/inputs/description";
 import selectId from "../../components/inputs/tranfer-select";
+import saveButton from '../../components/button/save-button'
+import select from '../../components/inputs/custom-select'
+
 export default {
   components: {
     "simple-input": simpleInput,
     "tranfer-select": selectId,
+    "save-button": saveButton,
     description: description,
+    'custom-select': select,
   },
   data() {
     return {
@@ -55,8 +67,13 @@ export default {
         typeMaintenance : "",
         sector : "",
         priority : "",
-        stats : ""
+        stats : "",
+        customSelect: '',
+        customSelect2: '',
       },
+      stats: [],
+
+
       selects: {
         select: "",
         selects: []
@@ -100,6 +117,12 @@ export default {
     this.getStats();
   },
   methods: {
+    getStatsSelect() {
+      const teste = this.stats.map(i => {
+        
+      })
+    },
+
     registerOrderMaintenance(){
       this.inputValues.equipment = this.selects.select;
       this.inputValues.priority = this.selectsPriority.select;
@@ -122,7 +145,7 @@ export default {
         body: JSON.stringify(this.inputValues)
       }).then(res => res.json())
         .then(json => {
-          if (json.statusCode === 404) return this.$swal({
+          if (json.status !== 200) return this.$swal({
             type: 'error',
             title: `Ops! ${json.err}`,
             confirmButtonColor: '#F34336',
@@ -251,22 +274,25 @@ export default {
             title: `Ops! ${res.err}`,
             confirmButtonColor: '#F34336',
           })
-          console.log("-------0000111")
-          console.log(res.result)
-          if (res.result.length === undefined) {
-            this.selects.selects.map(select => {
-              Object.entries(select).forEach(([key, value]) => {
-                console.log(key, value);
-              })
-            })
-          } // this.selects.selects.push(res.result)
-          else {
-            for (let index = 0; index < res.result.length; index++) {
-              this.selectsStats.selects.push(res.result[index]);
-              this.selectsStats.selects[index].value = res.result[index].idStatus;
-              this.selectsStats.selects[index].label = res.result[index].tipoStatus;
-            }
-          }          
+          if (res.result.length === undefined) 
+          this.stats.push(res.result)
+          else this.stats = [ ...res.result ]
+          // console.log("-------0000111")
+          // console.log(res.result)
+          // if (res.result.length === undefined) {
+          //   this.selects.selects.map(select => {
+          //     Object.entries(select).forEach(([key, value]) => {
+          //       console.log(key, value);
+          //     })
+          //   })
+          // } // this.selects.selects.push(res.result)
+          // else {
+          //   for (let index = 0; index < res.result.length; index++) {
+          //     this.selectsStats.selects.push(res.result[index]);
+          //     this.selectsStats.selects[index].value = res.result[index].idStatus;
+          //     this.selectsStats.selects[index].label = res.result[index].tipoStatus;
+          //   }
+          // }
       })
     }
   },
@@ -287,7 +313,7 @@ export default {
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 1fr 1fr;
       grid-gap: 25px;
-      background-color: #f8f9fa !important;
+      background-color: #ffffff;
       border-radius: 10px;
       padding:25px;
       align-items: start;

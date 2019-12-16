@@ -2,9 +2,7 @@
   <div class="container p-2">
     <div class="input-container mt-3">
       <b-form-select v-model="model" required>
-        <template v-for="(option, index) in selectOptions">
-          <option :value="option" :key="`option-${index}`">{{option}}</option>
-        </template>
+        <option v-for="(option, index) of selectOptions" :value="option" :key="`option-${index}`">{{option}}</option>
       </b-form-select>
     </div>
   </div>
@@ -15,7 +13,6 @@ export default {
   props: {
     label: { type: String, default: '' },
     selectOptions: { type: Array, default: () => [] },
-    placeholder: { type: String, default: '' },
     value: { type: undefined, default: '' }
   },
 

@@ -59,14 +59,14 @@ export default {
         body: JSON.stringify(this.inputValues)
       }).then(res => res.json())
         .then(json => {
-          if (json.statusCode === 404) return this.$swal({
+          if (json.status !== 200) return this.$swal({
             type: 'error',
             title: `Ops! ${json.err}`,
             confirmButtonColor: '#F34336',
           })
           this.$swal({
             type: 'success',
-            title: `${json.response}`,
+            title: `${json.result}`,
             confirmButtonColor: '#F34336',
           })
         })
@@ -83,14 +83,14 @@ export default {
         body: JSON.stringify(this.inputValues)
       }).then(res => res.json())
         .then(json => {
-          if (json.statusCode === 404) return this.$swal({
+          if (json.status !== 200) return this.$swal({
             type: 'error',
             title: `Ops! ${json.err}`,
             confirmButtonColor: '#F34336',
           })
           this.$swal({
             type: 'success',
-            title: `${json.response}`,
+            title: `${json.result}`,
             confirmButtonColor: '#F34336',
           })
         })
@@ -119,7 +119,7 @@ export default {
       display: flex;
       flex-direction: column;
       border-radius: 10px;
-      background-color: #f8f9fa !important;
+      background-color: #ffffff;
       .inputs {
         padding-left: 3.5%;
         padding-right: 3.5%;

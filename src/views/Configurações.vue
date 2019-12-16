@@ -77,22 +77,22 @@
         <accordion title="Cadastrar usuário" icon="fas fa-user">
           <form @submit.prevent="register">
             <div class="accordion-content bg-white mt-3 p-3 d-flex flex-wrap">
-              <div class="p-2 m-2 w-25">
+              <div class="p-2 m-2">
                 <simples-input v-model="userInputValues.nome" label="Nome" type="text"></simples-input>
               </div>
-              <div class="p-2 m-2 w-25">
+              <div class="p-2 m-2">
                 <simples-input v-model="userInputValues.numeroCracha" label="Cracha" type="number"></simples-input>
               </div>
-              <div class="p-2 m-2 w-25">
+              <div class="p-2 m-2">
                 <simples-input v-model="userInputValues.funcao" label="Função" type="text"></simples-input>
               </div>
-              <div class="p-2 m-2 w-25">
+              <div class="p-2 m-2">
                 <simples-input v-model="userInputValues.nivelAcesso" label="Nível de acesso" type="number"></simples-input>
               </div>
-              <div class="p-2 m-2 w-25">
+              <div class="p-2 m-2">
                 <simples-input v-model="userInputValues.email" label="E-mail" type="email"></simples-input>
               </div>
-              <div class="p-2 m-2 w-25">
+              <div class="p-2 m-2">
                 <simples-input v-model="userInputValues.senha" label="Senha" type="password"></simples-input>
               </div>
             </div>

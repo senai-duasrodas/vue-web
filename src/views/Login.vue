@@ -52,6 +52,7 @@ export default {
           if (json.status !== 200) return this.$swal({
             type: 'error',
             title: `${json.err}`,
+            confirmButtonColor: '#F34336',
           })
           try {
             await this.setTokenLocalStorage(json.token);
