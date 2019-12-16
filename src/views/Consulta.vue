@@ -3,9 +3,9 @@
     <transition name="slide-fade" mode="out-in">
       <template v-if="$route.path === '/consultas'">
         <div class="consulta-wrapper">
-          <div class="search-box">
+          <!-- <div class="search-box">
             Campo de busca
-          </div>
+          </div> -->
 
           <div class="order-consult mt-5">
             <div class="d-flex w-100 justify-content-center">

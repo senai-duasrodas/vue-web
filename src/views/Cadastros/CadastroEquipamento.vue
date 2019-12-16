@@ -1,5 +1,5 @@
 <template>
-    <div class="equipment-wrapper w-50">
+    <div class="equipment-wrapper">
       <div class="list-option">
         <div class="d-flex justify-content-between">
           <div class="option d-flex align-items-center m-4" @click="switchListRegister = 'list'">
@@ -47,23 +47,17 @@
         </template>
 
         <template v-if="switchListRegister === 'register'">
-          <form @submit.prevent="registerEquipment()" class="formPosition w-100">
+          <form @submit.prevent="registerEquipment()" class="formPosition">
             <div class="cadCard">
-              <div class="w-100">
+              <div class="input-card w-100 d-flex">
                 <simple-input v-model="inputValues.Setor_idSetor" label="Local Instalação:" type="number" />
-              </div>
-              <div class="w-100 d-flex flex-wrap">
                 <simple-input v-model="inputValues.equipamento" label="Equipamento:" type="text" />
-                <simple-input
-                  v-model="inputValues.equipamentoSuperior"
-                  label="Equipamento Superior:"
-                  type="text"
-                />
+                <simple-input v-model="inputValues.equipamentoSuperior" label="Equipamento Superior:" type="text" />
               </div>
-              <div class="textAreaDescription">
+              <div class="w-100">
                 <description
                   v-model="inputValues.descricao"
-                  cols="1"
+                  cols="30"
                   rows="3"
                   label="Descrição:"
                 />
@@ -228,6 +222,7 @@ export default {
 
 <style lang="scss" scoped>
 .equipment-wrapper {
+  width: 70%;
   .list-option {
     display: flex;
     justify-content: flex-start;
@@ -254,12 +249,17 @@ export default {
     flex-direction: column;
     align-items: center;
     .cadCard {
-      width: 100%;
+      width: 80%;
       padding: 20px;
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
       border-radius: 10px;
-      background-color: #f8f9fa !important;
+      background-color: #ffffff;
+      @media screen and (max-width: 1100px) {
+        .input-card {
+          flex-wrap: wrap
+        }
+      }
     }
   }
   

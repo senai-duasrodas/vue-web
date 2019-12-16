@@ -1,5 +1,5 @@
 <template>
-  <div class="root-local-instalacao-view w-50">
+  <div class="root-local-instalacao-view">
     <div class="list-option">
       <div class="d-flex justify-content-between">
         <div class="option d-flex align-items-center m-4" @click="switchListRegister = 'list'">
@@ -200,6 +200,7 @@ export default {
 
 <style lang="scss" scoped>
 .root-local-instalacao-view {
+  width: 70%;
   .list-option {
     display: flex;
     justify-content: flex-start;
@@ -226,12 +227,12 @@ export default {
     flex-direction: column;
     align-items: center;
     .cadCard {
-      width: 100%;
+      width: 80%;
       padding: 20px;
       display: flex;
       flex-direction: column;
       border-radius: 10px;
-      background-color: #f8f9fa !important;
+      background-color: #ffffff;
     }
   }
 

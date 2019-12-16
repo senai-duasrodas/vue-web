@@ -3,7 +3,7 @@
     <div class="erro-wrapper">
       <div class="p-4 d-flex justify-content-between">
         <div class="d-flex align-items-center m-5">
-          <i class="fas fa-exclamation-triangle" />
+          <i class="far fa-frown" />
         </div>
         <div class="m-5">
           <h1>Error 404<h2>Página não encontrada!</h2></h1>
