@@ -55,7 +55,21 @@ export default {
             confirmButtonColor: '#F34336',
           })
           try {
+            this.$setActivity(
+              'login',
+              {
+                nome: json.nome,
+                email: json.email,
+                cracha: json.numeroCracha,
+                date: this.$moment().format('DD-MM-YYYY HH-mm')
+              },
+              'unnecessaryToken'
+            );
+            
+            this.$store.commit('addUser', { email: json.email, nome: json.nome, nivelAcesso: json.nivelAcesso, cracha: json.numeroCracha });
+            
             await this.setTokenLocalStorage(json.token);
+
             this.$swal({
               position: 'top',
               type: 'success',
@@ -64,6 +78,7 @@ export default {
               showConfirmButton: false,
               timer: 1500
             }).then(() => {
+              console.log('statre :', this.$store.state.user);
               this.$router.replace('dashboard')
             });
           } catch (err) {

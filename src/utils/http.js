@@ -73,6 +73,21 @@ export default class Http {
         })
     })
   }
+
+  setActivity(activityId, activity, token) {
+    console.log('setActivity :', activityId, activity, token);
+    
+    fetch('http://localhost:3010/activity/set', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `${token}`,
+      },
+      body: JSON.stringify({ activityId, activity })
+    }).then(res => res.json())
+      .then(json => console.log('json :', json))
+      .catch(err => console.log('err :', err))
+  }
   
   verifyData(json) {
     if (json.status === 401) {
